@@ -87,7 +87,7 @@ img { width: 100%; display: block; object-fit: cover; }
 @keyframes scrollText { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* ═════════ PRODUCTS & CSS WATERMARK ═════════ */
-.pgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.pgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
 .pc-card { background: transparent; cursor: pointer; transition: 0.4s; }
 .pc-img { aspect-ratio: 4/5; overflow: hidden; position: relative; border-radius: 4px; }
 .pc-img img { height: 100%; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -138,7 +138,6 @@ img { width: 100%; display: block; object-fit: cover; }
     .hero-wrap, .corp-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
     .hero-btns { justify-content: center; }
     .glass-badge { display: none; }
-    .pgrid { grid-template-columns: 1fr 1fr; }
     .nav-links, .nav-btn { display: none; }
     .mobile-toggle { display: block; }
 }
