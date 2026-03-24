@@ -26,16 +26,32 @@ document.addEventListener("DOMContentLoaded", () => {
             nav.style.borderBottom = '1px solid rgba(255, 255, 255, 0.05)';
         }
     });
+
+    // 3. Smooth Scrolling for Anchor Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if(targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if(targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
 });
 
-// 3. Mobile Menu Toggle
+// 4. Mobile Menu Toggle
 function toggleMobileMenu() {
     const menu = document.getElementById('mobileMenu');
     menu.classList.toggle('active');
 }
 
-// 4. Smart Dynamic Modal Engine
-// type = 'pdf' or 'image'
+// 5. Smart Dynamic Modal Engine
 function openModal(name, category, type, sourceLink) {
     // Set Header Info
     document.getElementById('modalName').innerText = name;
@@ -51,28 +67,28 @@ function openModal(name, category, type, sourceLink) {
                 <p style="color: #fff; padding: 20px;">Your browser does not support PDFs. <a href="${sourceLink}" style="color: var(--gold-solid)">Download the PDF instead.</a></p>
             </iframe>
         `;
-        modalContentBlock.style.maxWidth = '1000px'; // Wider for documents
+        modalContentBlock.style.maxWidth = '1000px'; 
     } 
     // If Image, inject a standard image tag
     else if (type === 'image') {
         bodyContainer.innerHTML = `
             <img src="${sourceLink}" alt="${name}" class="modal-img-view" />
         `;
-        modalContentBlock.style.maxWidth = '600px'; // Thinner for photos
+        modalContentBlock.style.maxWidth = '600px'; 
     }
 
     // Show Modal
     document.getElementById('quickViewModal').classList.add('show');
-    document.body.style.overflow = 'hidden'; // Lock background scrolling
+    document.body.style.overflow = 'hidden'; 
 }
 
 // Close Modal Logic
 function closeModal(event, forceClose = false) {
     if (forceClose || event.target.id === 'quickViewModal') {
         document.getElementById('quickViewModal').classList.remove('show');
-        document.body.style.overflow = ''; // Unlock scrolling
+        document.body.style.overflow = ''; 
         
-        // Clear iframe to stop audio/downloads if user clicks away fast
+        // Clear iframe to stop audio/downloads
         setTimeout(() => {
             document.getElementById('modalDynamicBody').innerHTML = '';
         }, 400);
