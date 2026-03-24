@@ -1,1080 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>The Amore Giftings — Curated with Love</title>
-<meta name="description" content="Premium handcrafted gift hampers for Diwali, Birthdays, Weddings & Corporate gifting. Curated with love from Jaipur, India."/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Cormorant:ital,wght@1,300;1,400;1,500&display=swap" rel="stylesheet"/>
-
-<style>
-/* ════════════════════════════════════════════════════
-   DESIGN TOKENS
-════════════════════════════════════════════════════ */
-:root{
-  --c-bg:       #FAF6F1;
-  --c-bg2:      #F2EBE0;
-  --c-dark:     #2C1810;
-  --c-dark2:    #5C3520;
-  --c-gold:     #C4922A;
-  --c-gold2:    #E8C06A;
-  --c-blush:    #E8C4B0;
-  --c-blush2:   #F5E0D5;
-  --c-muted:    #9A8070;
-  --c-white:    #FFFFFF;
-  --c-ink:      #1A0F08;
-
-  --f-serif:    'Playfair Display', Georgia, serif;
-  --f-sans:     'DM Sans', sans-serif;
-  --f-italic:   'Cormorant', Georgia, serif;
-
-  --r-sm: 10px; --r-md: 18px; --r-lg: 28px; --r-xl: 48px;
-  --sh-soft: 0 4px 30px rgba(44,24,16,.07);
-  --sh-card: 0 10px 50px rgba(44,24,16,.13);
-  --sh-big:  0 24px 80px rgba(44,24,16,.18);
-}
-
-/* ════════════════════════════════════════════════════
-   RESET
-════════════════════════════════════════════════════ */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
-body{font-family:var(--f-sans);background:var(--c-bg);color:var(--c-dark);overflow-x:hidden;line-height:1.6;cursor:none}
-img{display:block;max-width:100%;object-fit:cover}
-a{color:inherit;text-decoration:none}
-button,input,select{font-family:var(--f-sans);outline:none;border:none;cursor:none}
-ul{list-style:none}
-
-/* ════════════════════════════════════════════════════
-   CURSOR
-════════════════════════════════════════════════════ */
-#cur{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;mix-blend-mode:multiply}
-#cur-dot{position:absolute;width:8px;height:8px;background:var(--c-gold);border-radius:50%;transform:translate(-50%,-50%);transition:.1s}
-#cur-ring{position:absolute;width:36px;height:36px;border:1.5px solid var(--c-gold);border-radius:50%;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s;opacity:.6}
-body:has(a:hover) #cur-ring,body:has(button:hover) #cur-ring{width:52px;height:52px;border-color:var(--c-blush);opacity:.8}
-
-/* ════════════════════════════════════════════════════
-   LAYOUT HELPERS
-════════════════════════════════════════════════════ */
-.wrap{max-width:1260px;margin:0 auto;padding:0 44px}
-@media(max-width:640px){.wrap{padding:0 20px}}
-
-.eyebrow{font-family:var(--f-italic);font-style:italic;font-size:17px;color:var(--c-gold);margin-bottom:10px;display:block}
-.heading{font-family:var(--f-serif);font-size:clamp(2rem,3.8vw,3.4rem);font-weight:500;line-height:1.12;color:var(--c-dark)}
-.sub{font-size:15px;color:var(--c-muted);line-height:1.75;max-width:500px;margin-top:12px}
-
-/* scroll reveal */
-.sr{opacity:0;transform:translateY(32px);transition:opacity .65s ease,transform .65s ease}
-.sr.on{opacity:1;transform:translateY(0)}
-
-/* pill tag */
-.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 16px;border:1px solid rgba(196,146,42,.3);border-radius:100px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--c-gold);background:rgba(196,146,42,.06)}
-
-/* buttons */
-.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 34px;border-radius:100px;font-size:13px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;transition:all .28s cubic-bezier(.25,.46,.45,.94)}
-.btn-dark{background:var(--c-dark);color:var(--c-bg);box-shadow:0 8px 28px rgba(44,24,16,.22)}
-.btn-dark:hover{background:var(--c-gold);box-shadow:0 14px 44px rgba(196,146,42,.32);transform:translateY(-3px)}
-.btn-dark .ic{width:28px;height:28px;background:rgba(255,255,255,.12);border-radius:50%;display:grid;place-items:center;font-size:14px;transition:transform .3s}
-.btn-dark:hover .ic{transform:translateX(4px)}
-.btn-outline{background:transparent;color:var(--c-dark);border:1.5px solid rgba(44,24,16,.18)}
-.btn-outline:hover{border-color:var(--c-gold);color:var(--c-gold);transform:translateY(-2px)}
-.btn-gold{background:var(--c-gold);color:#fff;box-shadow:0 8px 28px rgba(196,146,42,.28)}
-.btn-gold:hover{background:#a37620;transform:translateY(-3px);box-shadow:0 14px 44px rgba(196,146,42,.4)}
-
-/* ════════════════════════════════════════════════════
-   IMAGE SYSTEM — beautiful CSS gradient art for every
-   product/occasion when real images can't load
-════════════════════════════════════════════════════ */
-.img-wrap{position:relative;overflow:hidden;background:var(--c-bg2)}
-.img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
-.img-wrap:hover img{transform:scale(1.07)}
-
-/* Gradient art fallbacks (shown behind img) */
-.gi-diwali    {background:linear-gradient(145deg,#7B2D00 0%,#D4631A 40%,#F5A623 100%)}
-.gi-birthday  {background:linear-gradient(145deg,#6B1060 0%,#C4388A 50%,#F08CC0 100%)}
-.gi-wedding   {background:linear-gradient(145deg,#2C1810 0%,#7A4025 50%,#C4922A 100%)}
-.gi-corporate {background:linear-gradient(145deg,#0D2340 0%,#1A4D80 50%,#4A8FC0 100%)}
-.gi-love      {background:linear-gradient(145deg,#8B1A14 0%,#D44030 50%,#F08070 100%)}
-.gi-baby      {background:linear-gradient(145deg,#2A5C28 0%,#4E9E4C 50%,#A8D8A0 100%)}
-.gi-gold      {background:linear-gradient(145deg,#5C3800 0%,#A07020 50%,#E8C06A 100%)}
-.gi-blush     {background:linear-gradient(145deg,#7A3A28 0%,#C07050 50%,#F0C0A0 100%)}
-.gi-teal      {background:linear-gradient(145deg,#104040 0%,#208080 50%,#60C0C0 100%)}
-
-/* gift icon watermark inside gradient boxes */
-.img-art{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;opacity:.35}
-.img-art-icon{font-size:clamp(40px,6vw,72px);filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))}
-.img-art-label{font-family:var(--f-serif);font-style:italic;font-size:clamp(13px,1.5vw,18px);color:#fff;letter-spacing:.08em;text-align:center;padding:0 12px}
-
-/* ════════════════════════════════════════════════════
-   NAV
-════════════════════════════════════════════════════ */
-nav{position:fixed;top:0;left:0;right:0;z-index:800;transition:background .4s,padding .35s,box-shadow .4s;padding:22px 0}
-nav.stuck{background:rgba(250,246,241,.95);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);padding:14px 0;box-shadow:0 2px 20px rgba(44,24,16,.07)}
-.nav-in{display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;flex-direction:column;gap:1px;line-height:1}
-.logo-sub{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--c-gold);font-weight:600}
-.logo-name{font-family:var(--f-serif);font-size:24px;font-weight:600;color:var(--c-dark)}
-.nav-links{display:flex;align-items:center;gap:34px}
-.nav-links a{font-size:13px;font-weight:500;color:var(--c-dark2);position:relative;padding-bottom:3px;transition:color .25s}
-.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--c-gold);transition:width .3s}
-.nav-links a:hover{color:var(--c-dark)}
-.nav-links a:hover::after{width:100%}
-.nav-cta{background:var(--c-dark);color:var(--c-bg)!important;border-radius:100px;padding:10px 24px!important;font-weight:600!important;transition:background .28s!important}
-.nav-cta::after{display:none!important}
-.nav-cta:hover{background:var(--c-gold)!important}
-.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:6px}
-.hbg span{display:block;width:22px;height:2px;background:var(--c-dark);border-radius:2px;transition:.3s}
-.mob-menu{display:none;position:fixed;inset:0;z-index:850;background:var(--c-bg);flex-direction:column;align-items:center;justify-content:center;gap:28px}
-.mob-menu.open{display:flex}
-.mob-menu a{font-family:var(--f-serif);font-size:2.2rem;color:var(--c-dark)}
-.mob-x{position:absolute;top:22px;right:22px;background:none;border:none;font-size:2rem;color:var(--c-dark)}
-
-/* ════════════════════════════════════════════════════
-   HERO
-════════════════════════════════════════════════════ */
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:110px 0 80px;position:relative;overflow:hidden}
-.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 68% 44%,rgba(196,146,42,.1) 0%,transparent 60%),radial-gradient(ellipse at 14% 78%,rgba(232,192,110,.08) 0%,transparent 45%)}
-.hero-ring{position:absolute;border-radius:50%;border:1px solid rgba(196,146,42,.12);pointer-events:none}
-.hr1{width:700px;height:700px;right:-240px;top:50%;transform:translateY(-50%)}
-.hr2{width:460px;height:460px;right:-100px;top:50%;transform:translateY(-50%)}
-.hr3{width:220px;height:220px;left:8%;bottom:12%;border-color:rgba(196,146,42,.07)}
-.hero-l{position:relative;z-index:2;padding:0 40px 0 44px}
-.hero-pre{display:flex;align-items:center;gap:12px;margin-bottom:26px}
-.hero-pre-line{width:36px;height:1px;background:var(--c-gold)}
-.hero-pre span{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--c-gold)}
-.hero-h1{font-family:var(--f-serif);font-size:clamp(3rem,5.2vw,5rem);line-height:1.07;font-weight:500;color:var(--c-dark);margin-bottom:6px}
-.hero-h1 em{font-style:italic;color:var(--c-gold);display:block}
-.hero-tagline{font-family:var(--f-italic);font-style:italic;font-size:clamp(1rem,1.8vw,1.3rem);color:var(--c-muted);max-width:420px;line-height:1.65;margin-bottom:38px}
-.hero-btns{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-.hero-stats{display:flex;gap:16px;margin-top:50px;flex-wrap:wrap}
-.stat{background:var(--c-white);border-radius:14px;padding:14px 20px;box-shadow:var(--sh-soft);display:flex;flex-direction:column;gap:2px}
-.stat-n{font-family:var(--f-serif);font-size:1.55rem;font-weight:500;color:var(--c-dark);line-height:1}
-.stat-l{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--c-muted);line-height:1.3}
-
-/* Hero right */
-.hero-r{position:relative;z-index:2;padding:0 40px 0 20px;display:flex;justify-content:flex-end}
-.hero-img-main{width:90%;max-width:520px;aspect-ratio:4/5;border-radius:28px 28px 110px 28px;overflow:hidden;box-shadow:var(--sh-big);position:relative}
-.hero-float-badge{position:absolute;bottom:-22px;left:-30px;background:var(--c-white);border-radius:18px;padding:16px 20px;box-shadow:var(--sh-card);display:flex;align-items:center;gap:14px;min-width:210px;animation:floatY 4s ease-in-out infinite}
-.hero-float-top{position:absolute;top:28px;right:-22px;background:var(--c-dark);color:var(--c-bg);border-radius:14px;padding:14px 18px;font-size:13px;line-height:1.4;box-shadow:var(--sh-big);animation:floatY 4.5s ease-in-out infinite .6s}
-.hero-float-top strong{font-family:var(--f-serif);font-size:1.6rem;color:var(--c-gold2);display:block}
-@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-.badge-ico{font-size:30px}
-.badge-t{font-size:10px;color:var(--c-muted);letter-spacing:.06em}
-.badge-b{font-family:var(--f-serif);font-size:15px;font-weight:500;color:var(--c-dark)}
-
-/* ════════════════════════════════════════════════════
-   TICKER
-════════════════════════════════════════════════════ */
-.ticker{background:var(--c-dark);padding:13px 0;overflow:hidden;position:relative;z-index:5}
-.ticker-track{display:flex;width:max-content;animation:tickerMove 30s linear infinite}
-.ticker-track:hover{animation-play-state:paused}
-@keyframes tickerMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.ti{display:inline-flex;align-items:center;gap:14px;color:rgba(250,246,241,.75);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;padding:0 36px}
-.ti-dot{width:4px;height:4px;background:var(--c-gold);border-radius:50%;flex-shrink:0}
-.ti-heart{color:var(--c-gold)}
-
-/* ════════════════════════════════════════════════════
-   OCCASIONS
-════════════════════════════════════════════════════ */
-.occasions{padding:110px 0 80px}
-.sec-hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;flex-wrap:wrap;gap:20px}
-.occ-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:18px}
-.occ-card{border-radius:24px;overflow:hidden;position:relative;cursor:none;transition:transform .35s cubic-bezier(.25,.46,.45,.94),box-shadow .35s}
-.occ-card:hover{transform:translateY(-10px);box-shadow:var(--sh-big)}
-.occ-card.tall{grid-row:span 2}
-.occ-img{width:100%;height:100%;position:relative}
-.occ-card:not(.tall) .occ-img{aspect-ratio:1.1/1}
-.occ-card.tall .occ-img{min-height:520px}
-.occ-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(26,15,8,.75) 0%,rgba(26,15,8,.1) 55%,transparent 100%)}
-.occ-body{position:absolute;bottom:0;left:0;right:0;padding:24px 22px}
-.occ-icon{font-size:26px;margin-bottom:7px}
-.occ-name{font-family:var(--f-serif);font-size:1.3rem;font-weight:500;color:#fff;line-height:1.2}
-.occ-count{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:4px}
-.occ-arrow{position:absolute;top:18px;right:18px;width:38px;height:38px;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;opacity:0;transform:scale(.7) rotate(-45deg);transition:opacity .3s,transform .3s}
-.occ-card:hover .occ-arrow{opacity:1;transform:scale(1) rotate(0)}
-
-/* ════════════════════════════════════════════════════
-   GIFT FINDER
-════════════════════════════════════════════════════ */
-.finder{background:var(--c-dark);padding:90px 0;position:relative;overflow:hidden}
-.finder::before,.finder::after{content:'';position:absolute;border-radius:50%;pointer-events:none}
-.finder::before{width:600px;height:600px;background:radial-gradient(circle,rgba(196,146,42,.1),transparent 70%);right:-160px;top:50%;transform:translateY(-50%)}
-.finder::after{width:380px;height:380px;background:radial-gradient(circle,rgba(232,196,178,.07),transparent 70%);left:-100px;bottom:-80px}
-.finder-in{display:grid;grid-template-columns:1fr 1.05fr;gap:72px;align-items:center;position:relative;z-index:2}
-.finder-copy .eyebrow{color:var(--c-gold2)}
-.finder-copy .heading{color:var(--c-bg)}
-.finder-copy .sub{color:rgba(250,246,241,.55)}
-.finder-perks{margin-top:36px;display:flex;flex-direction:column;gap:14px}
-.perk{display:flex;align-items:center;gap:14px;font-size:14px;color:rgba(250,246,241,.65)}
-.perk-ico{width:38px;height:38px;border-radius:10px;background:rgba(196,146,42,.15);border:1px solid rgba(196,146,42,.2);display:grid;place-items:center;font-size:18px;flex-shrink:0}
-.finder-box{background:rgba(250,246,241,.05);border:1px solid rgba(196,146,42,.18);border-radius:26px;padding:36px;backdrop-filter:blur(12px)}
-.finder-box-title{font-family:var(--f-serif);color:var(--c-bg);font-size:1.25rem;font-weight:400;margin-bottom:26px}
-.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-.fg{display:flex;flex-direction:column;gap:6px}
-.fg label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,246,241,.45);font-weight:600}
-.fg select,.fg input{background:rgba(250,246,241,.07);border:1px solid rgba(196,146,42,.18);border-radius:12px;padding:13px 15px;color:var(--c-bg);font-size:13.5px;transition:border-color .3s,background .3s;-webkit-appearance:none;appearance:none}
-.fg select:focus,.fg input:focus{border-color:var(--c-gold);background:rgba(196,146,42,.1)}
-.fg select option{background:var(--c-dark)}
-.finder-btn{width:100%;padding:15px;background:linear-gradient(135deg,var(--c-gold),#8B6018);color:#fff;border-radius:13px;font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;transition:transform .25s,box-shadow .3s;box-shadow:0 8px 28px rgba(196,146,42,.22);margin-top:6px}
-.finder-btn:hover{transform:translateY(-2px);box-shadow:0 16px 44px rgba(196,146,42,.35)}
-#fres{margin-top:14px;font-size:13px;color:rgba(250,246,241,.65);text-align:center;min-height:20px}
-
-/* ════════════════════════════════════════════════════
-   PRODUCTS
-════════════════════════════════════════════════════ */
-.products{padding:110px 0}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:48px}
-.tab{padding:9px 22px;border-radius:100px;border:1px solid var(--c-bg2);background:var(--c-white);color:var(--c-muted);font-size:13px;font-weight:500;transition:all .25s}
-.tab:hover{border-color:var(--c-gold);color:var(--c-dark)}
-.tab.on{background:var(--c-dark);border-color:var(--c-dark);color:var(--c-bg)}
-.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
-.pc{background:var(--c-white);border-radius:22px;overflow:hidden;box-shadow:var(--sh-soft);transition:transform .35s cubic-bezier(.25,.46,.45,.94),box-shadow .35s;position:relative}
-.pc:hover{transform:translateY(-10px);box-shadow:var(--sh-card)}
-.pc-img{aspect-ratio:4/3;position:relative}
-.pc-img .img-wrap{width:100%;height:100%}
-.pc-badge{position:absolute;top:13px;left:13px;z-index:3;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:100px;color:#fff}
-.bg-gold{background:var(--c-gold)} .bg-dark{background:var(--c-dark)} .bg-blush{background:var(--c-blush);color:var(--c-dark)!important}
-.pc-acts{position:absolute;top:13px;right:13px;z-index:3;display:flex;flex-direction:column;gap:7px;opacity:0;transform:translateX(8px);transition:opacity .28s,transform .28s}
-.pc:hover .pc-acts{opacity:1;transform:translateX(0)}
-.pc-act{width:36px;height:36px;background:var(--c-white);border-radius:50%;display:grid;place-items:center;font-size:15px;box-shadow:var(--sh-soft);transition:background .2s}
-.pc-act:hover{background:var(--c-gold);color:#fff}
-.pc-body{padding:18px 20px 22px}
-.pc-coll{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--c-gold);font-weight:600;margin-bottom:5px}
-.pc-name{font-family:var(--f-serif);font-size:1.08rem;font-weight:500;color:var(--c-dark);line-height:1.25;margin-bottom:7px}
-.pc-desc{font-size:12px;color:var(--c-muted);line-height:1.55;margin-bottom:14px}
-.pc-ft{display:flex;align-items:center;justify-content:space-between}
-.pc-price{font-family:var(--f-serif);font-size:1.25rem;font-weight:500;color:var(--c-dark)}
-.pc-price span{font-family:var(--f-sans);font-size:11px;color:var(--c-muted);font-weight:400}
-.pc-add{width:40px;height:40px;border-radius:50%;background:var(--c-dark);color:var(--c-bg);display:grid;place-items:center;font-size:20px;transition:background .25s,transform .25s}
-.pc-add:hover{background:var(--c-gold);transform:rotate(90deg)}
-
-/* ════════════════════════════════════════════════════
-   HOW IT WORKS
-════════════════════════════════════════════════════ */
-.hiw{padding:110px 0;background:var(--c-bg2)}
-.hiw-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:68px;position:relative}
-.hiw-grid::before{content:'';position:absolute;top:40px;left:calc(12.5% + 22px);right:calc(12.5% + 22px);height:1px;background:linear-gradient(90deg,transparent,rgba(196,146,42,.4),transparent)}
-.step{text-align:center;position:relative}
-.step-ico-w{width:80px;height:80px;border-radius:50%;background:var(--c-white);border:1.5px solid rgba(196,146,42,.25);display:grid;place-items:center;margin:0 auto 22px;position:relative;z-index:2;box-shadow:var(--sh-soft);transition:box-shadow .3s,border-color .3s}
-.step:hover .step-ico-w{border-color:var(--c-gold);box-shadow:0 0 0 8px rgba(196,146,42,.07)}
-.step-ico{font-size:28px}
-.step-title{font-family:var(--f-serif);font-size:1.1rem;font-weight:500;margin-bottom:9px}
-.step-desc{font-size:13px;color:var(--c-muted);line-height:1.7;max-width:210px;margin:0 auto}
-
-/* ════════════════════════════════════════════════════
-   CORPORATE BANNER
-════════════════════════════════════════════════════ */
-.corp{padding:100px 0;background:linear-gradient(135deg,var(--c-bg2) 0%,rgba(232,192,176,.25) 100%)}
-.corp-in{display:grid;grid-template-columns:1fr 1.15fr;gap:72px;align-items:center}
-.corp-pts{list-style:none;display:flex;flex-direction:column;gap:12px;margin:24px 0 34px}
-.corp-pts li{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--c-dark2)}
-.ck{width:22px;height:22px;border-radius:50%;background:rgba(196,146,42,.12);display:grid;place-items:center;font-size:11px;color:var(--c-gold);flex-shrink:0}
-.corp-imgs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:14px}
-.ci{border-radius:20px;overflow:hidden;box-shadow:var(--sh-card);transition:transform .4s ease}
-.ci:hover{transform:translateY(-6px)}
-.ci img{width:100%;height:100%}
-.ci.tall{grid-row:span 2;border-radius:26px}
-.ci-a{aspect-ratio:3/4}
-.ci-b{aspect-ratio:1/1}
-.ci-c{aspect-ratio:1/1}
-
-/* ════════════════════════════════════════════════════
-   TESTIMONIALS
-════════════════════════════════════════════════════ */
-.testi{padding:110px 0;overflow:hidden}
-.testi-hd{text-align:center;margin-bottom:60px}
-.testi-hd .sub{margin:12px auto 0}
-.testi-track-w{overflow:hidden;mask-image:linear-gradient(90deg,transparent,black 10%,black 90%,transparent)}
-.testi-track{display:flex;gap:22px;width:max-content;animation:testiScroll 38s linear infinite}
-.testi-track:hover{animation-play-state:paused}
-@keyframes testiScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.tc{width:370px;flex-shrink:0;background:var(--c-white);border-radius:22px;padding:30px;box-shadow:var(--sh-soft);border:1px solid rgba(196,146,42,.07)}
-.tc-stars{color:var(--c-gold);font-size:13px;letter-spacing:3px;margin-bottom:13px}
-.tc-text{font-family:var(--f-italic);font-style:italic;font-size:1rem;line-height:1.7;color:var(--c-dark2);margin-bottom:18px}
-.tc-auth{display:flex;align-items:center;gap:12px}
-.tc-av{width:42px;height:42px;border-radius:50%;background:var(--c-blush2);display:grid;place-items:center;font-size:18px;flex-shrink:0}
-.tc-n{font-weight:600;font-size:14px;color:var(--c-dark)}
-.tc-d{font-size:12px;color:var(--c-muted)}
-.tc-occ{margin-top:16px;padding-top:16px;border-top:1px solid var(--c-bg2);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-gold);font-weight:600}
-
-/* ════════════════════════════════════════════════════
-   CTA STRIP
-════════════════════════════════════════════════════ */
-.cta-strip{background:var(--c-dark);padding:80px 0;position:relative;overflow:hidden;text-align:center}
-.cta-strip::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(196,146,42,.1),transparent 70%);left:50%;top:50%;transform:translate(-50%,-50%)}
-.cta-in{position:relative;z-index:2;max-width:580px;margin:0 auto}
-.cta-title{font-family:var(--f-serif);font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--c-bg);font-weight:400;margin:10px 0 8px}
-.cta-title em{font-style:italic;color:var(--c-gold2)}
-.cta-sub{color:rgba(250,246,241,.55);font-size:15px;margin-bottom:34px}
-.nl-form{display:flex;gap:10px;max-width:460px;margin:0 auto}
-.nl-in{flex:1;padding:14px 20px;background:rgba(250,246,241,.07);border:1px solid rgba(196,146,42,.22);border-radius:100px;color:var(--c-bg);font-size:14px;transition:border-color .3s}
-.nl-in::placeholder{color:rgba(250,246,241,.35)}
-.nl-in:focus{border-color:var(--c-gold)}
-.nl-btn{padding:14px 26px;background:var(--c-gold);color:#fff;border-radius:100px;font-weight:600;font-size:13px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;transition:background .3s,transform .25s}
-.nl-btn:hover{background:var(--c-gold2);color:var(--c-dark);transform:translateY(-2px)}
-#nlmsg{margin-top:12px;font-size:13px;color:rgba(250,246,241,.55);height:18px}
-
-/* ════════════════════════════════════════════════════
-   FOOTER
-════════════════════════════════════════════════════ */
-footer{background:#150C06;padding:72px 0 28px}
-.ft-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.1fr;gap:52px;margin-bottom:52px}
-.ft-brand-name{font-family:var(--f-serif);font-size:1.9rem;font-weight:500;color:var(--c-bg);line-height:1;margin-bottom:4px}
-.ft-brand-tag{font-family:var(--f-italic);font-style:italic;font-size:13px;color:var(--c-gold);margin-bottom:16px}
-.ft-brand-desc{font-size:13px;color:rgba(250,246,241,.42);line-height:1.8;max-width:270px;margin-bottom:24px}
-.ft-soc{display:flex;gap:10px}
-.fs{width:38px;height:38px;border-radius:50%;background:rgba(250,246,241,.06);border:1px solid rgba(250,246,241,.1);display:grid;place-items:center;font-size:14px;color:rgba(250,246,241,.5);transition:background .3s,border-color .3s,color .3s}
-.fs:hover{background:var(--c-gold);border-color:var(--c-gold);color:#fff}
-.ft-col-title{font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--c-gold);margin-bottom:20px}
-.ft-links{display:flex;flex-direction:column;gap:10px}
-.ft-links a{font-size:13.5px;color:rgba(250,246,241,.45);transition:color .25s}
-.ft-links a:hover{color:var(--c-bg)}
-.ft-contact{display:flex;flex-direction:column;gap:10px}
-.fc-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(250,246,241,.45);line-height:1.4}
-.fc-item span{font-size:15px;flex-shrink:0;margin-top:1px}
-.ft-div{border:none;height:1px;background:rgba(250,246,241,.07);margin-bottom:26px}
-.ft-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
-.ft-copy{font-size:12px;color:rgba(250,246,241,.25)}
-.ft-copy strong{color:var(--c-gold)}
-.ft-legal{display:flex;gap:22px}
-.ft-legal a{font-size:12px;color:rgba(250,246,241,.25);transition:color .25s}
-.ft-legal a:hover{color:rgba(250,246,241,.7)}
-
-/* scroll to top */
-.stt{position:fixed;bottom:30px;right:30px;z-index:500;width:46px;height:46px;border-radius:50%;background:var(--c-dark);color:var(--c-bg);font-size:18px;display:grid;place-items:center;box-shadow:var(--sh-card);transform:translateY(80px);opacity:0;transition:transform .4s,opacity .4s,background .3s}
-.stt.vis{transform:translateY(0);opacity:1}
-.stt:hover{background:var(--c-gold)}
-
-/* ════════════════════════════════════════════════════
-   RESPONSIVE
-════════════════════════════════════════════════════ */
-@media(max-width:1100px){
-  .pgrid{grid-template-columns:repeat(2,1fr)}
-  .occ-grid{grid-template-columns:repeat(3,1fr)}
-  .ft-top{grid-template-columns:1fr 1fr;gap:36px}
-  .corp-in{grid-template-columns:1fr}
-  .corp-imgs{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px}
-  .ci.tall{min-width:220px;min-height:340px}
-}
-@media(max-width:860px){
-  .hero{grid-template-columns:1fr;padding:120px 0 60px}
-  .hero-r{display:none}
-  .finder-in{grid-template-columns:1fr;gap:40px}
-  .hiw-grid{grid-template-columns:repeat(2,1fr)}
-  .hiw-grid::before{display:none}
-  .nav-links{display:none}
-  .hbg{display:flex}
-}
-@media(max-width:640px){
-  .occ-grid{grid-template-columns:1fr 1fr}
-  .occ-card.tall{grid-row:span 1}
-  .occ-card.tall .occ-img{min-height:auto;aspect-ratio:1.1/1}
-  .pgrid{grid-template-columns:1fr}
-  .hiw-grid{grid-template-columns:1fr 1fr}
-  .ft-top{grid-template-columns:1fr}
-  .nl-form{flex-direction:column}
-  .fgrid{grid-template-columns:1fr}
-  .hero-l{padding:0 20px}
-}
-</style>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>The Amore Giftings — Premium Curated Hampers</title>
+    <meta name="description" content="Luxury handcrafted gift hampers. Curated with love from Jaipur, India."/>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    
+    <link rel="stylesheet" href="css/main.css"/>
 </head>
 <body>
 
-<!-- ─── Custom cursor ─── -->
-<div id="cur"><div id="cur-dot"></div><div id="cur-ring"></div></div>
+    <div class="ambient-glow"></div>
 
-<!-- ══════════════════════════════════════
-     NAV
-══════════════════════════════════════ -->
-<nav id="nav">
-  <div class="wrap">
-    <div class="nav-in">
-      <a href="#" class="logo">
-        <span class="logo-sub">The Amore Giftings</span>
-        <span class="logo-name">TAG ♥</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#occasions">Occasions</a></li>
-        <li><a href="#collections">Collections</a></li>
-        <li><a href="#corporate">Corporate</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="tel:+917976582327" class="nav-cta">+91 79765 82327</a></li>
-      </ul>
-      <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
-    </div>
-  </div>
-</nav>
-
-<div class="mob-menu" id="mobMenu">
-  <button class="mob-x" id="mobX">✕</button>
-  <a href="#occasions" class="mob-l">Occasions</a>
-  <a href="#collections" class="mob-l">Collections</a>
-  <a href="#corporate" class="mob-l">Corporate</a>
-  <a href="#about" class="mob-l">About</a>
-  <a href="mailto:corporate@theamoregiftings.in">Enquire Now</a>
-</div>
-
-<!-- ══════════════════════════════════════
-     HERO
-══════════════════════════════════════ -->
-<section class="hero" id="home">
-  <div class="hero-glow"></div>
-  <div class="hero-ring hr1"></div>
-  <div class="hero-ring hr2"></div>
-  <div class="hero-ring hr3"></div>
-
-  <div class="hero-l sr">
-    <div class="hero-pre">
-      <span class="hero-pre-line"></span>
-      <span>Curated with Love · Jaipur</span>
-    </div>
-    <h1 class="hero-h1">Gift them<br>something<br><em>unforgettable.</em></h1>
-    <p class="hero-tagline">Handcrafted hampers & festive gifting experiences — thoughtfully curated for every moment that matters.</p>
-    <div class="hero-btns">
-      <a href="#collections" class="btn btn-dark">Explore Gifts <span class="ic">→</span></a>
-      <a href="#finder" class="btn btn-outline">Find a Gift ✨</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat sr" style="transition-delay:.1s"><span class="stat-n">5K+</span><span class="stat-l">Hampers<br>Delivered</span></div>
-      <div class="stat sr" style="transition-delay:.18s"><span class="stat-n">200+</span><span class="stat-l">Corporate<br>Clients</span></div>
-      <div class="stat sr" style="transition-delay:.26s"><span class="stat-n">4.9★</span><span class="stat-l">Average<br>Rating</span></div>
-    </div>
-  </div>
-
-  <!-- Hero visual (art-based, no broken img dependency) -->
-  <div class="hero-r">
-    <div style="position:relative;width:90%;max-width:510px;">
-      <div class="hero-img-main gi-diwali" style="display:flex;align-items:center;justify-content:center;">
-        <div class="img-art" style="opacity:.5;flex-direction:column;gap:12px;">
-          <div style="font-size:90px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.4))">🪔</div>
-          <div style="font-family:var(--f-serif);font-style:italic;font-size:24px;color:rgba(255,255,255,.85);text-shadow:0 2px 8px rgba(0,0,0,.3)">Diwali Collection</div>
-          <div style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)">The Amore Giftings</div>
+    <nav id="nav" class="glass-nav">
+        <div class="wrap nav-in">
+            <a href="#" class="logo">
+                <span class="logo-sub">The Amore Giftings</span>
+                <span class="logo-name">TAG</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#collections">Featured</a></li>
+                <li class="dropdown">
+                    <a href="#catalogues" class="dropdown-trigger">Catalogues ▾</a>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="openModal('Diwali 2025 Catalogue', 'Festive Collection', 'pdf', 'assets/2025 Diwali catalogue.pdf'); return false;">Diwali 2025</a>
+                        <a href="#" onclick="openModal('Corporate Hampers', 'B2B Gifting Solutions', 'pdf', 'assets/Corporate Hampers.pdf'); return false;">Corporate Hampers</a>
+                    </div>
+                </li>
+                <li><a href="#corporate">B2B Services</a></li>
+            </ul>
+            
+            <a href="mailto:corporate@theamoregiftings.in" class="btn btn-gold nav-btn">Enquire Now</a>
+            
+            <div class="mobile-toggle" onclick="toggleMobileMenu()">☰</div>
         </div>
-        <!-- Try loading a real Unsplash image on top -->
-        <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80&auto=format&fit=crop"
-             alt="Premium Diwali Hamper" loading="eager"
-             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:28px 28px 110px 28px;opacity:1"
-             onerror="this.style.display='none'"/>
-      </div>
+    </nav>
 
-      <div class="hero-float-badge">
-        <span class="badge-ico">🎁</span>
-        <div><div class="badge-t">Festive Season 2025</div><div class="badge-b">Diwali Specials</div></div>
-      </div>
-      <div class="hero-float-top">
-        <strong>₹999</strong>
-        Starting from
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     TICKER
-══════════════════════════════════════ -->
-<div class="ticker">
-  <div class="ticker-track">
-    <span class="ti"><span class="ti-dot"></span>Diwali Hampers</span>
-    <span class="ti"><span class="ti-dot"></span>Corporate Gifting</span>
-    <span class="ti"><span class="ti-dot"></span>Wedding Favours</span>
-    <span class="ti"><span class="ti-dot"></span>Birthday Specials</span>
-    <span class="ti"><span class="ti-dot"></span>Custom Branding</span>
-    <span class="ti"><span class="ti-dot"></span>Pan‑India Delivery</span>
-    <span class="ti"><span class="ti-dot"></span>Luxury Packaging</span>
-    <span class="ti"><span class="ti-heart">♥</span> Curated with Love</span>
-    <!-- duplicate -->
-    <span class="ti"><span class="ti-dot"></span>Diwali Hampers</span>
-    <span class="ti"><span class="ti-dot"></span>Corporate Gifting</span>
-    <span class="ti"><span class="ti-dot"></span>Wedding Favours</span>
-    <span class="ti"><span class="ti-dot"></span>Birthday Specials</span>
-    <span class="ti"><span class="ti-dot"></span>Custom Branding</span>
-    <span class="ti"><span class="ti-dot"></span>Pan‑India Delivery</span>
-    <span class="ti"><span class="ti-dot"></span>Luxury Packaging</span>
-    <span class="ti"><span class="ti-heart">♥</span> Curated with Love</span>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════
-     OCCASIONS
-══════════════════════════════════════ -->
-<section class="occasions" id="occasions">
-  <div class="wrap">
-    <div class="sec-hd">
-      <div>
-        <span class="eyebrow">Shop by Occasion</span>
-        <h2 class="heading">Every moment<br>deserves a gift.</h2>
-      </div>
-      <a href="#collections" class="btn btn-outline" style="padding:12px 26px;font-size:13px;">View All →</a>
+    <div id="mobileMenu" class="mobile-menu">
+        <button class="modal-close" onclick="toggleMobileMenu()" style="top: 30px; right: 30px;">✕</button>
+        <a href="#" onclick="openModal('Diwali 2025 Catalogue', 'Festive Collection', 'pdf', 'assets/2025 Diwali catalogue.pdf'); toggleMobileMenu();">Open Diwali PDF</a>
+        <a href="#" onclick="openModal('Corporate Hampers', 'B2B Gifting', 'pdf', 'assets/Corporate Hampers.pdf'); toggleMobileMenu();">Open Corporate PDF</a>
+        <a href="#corporate" onclick="toggleMobileMenu()">Corporate Services</a>
     </div>
 
-    <div class="occ-grid">
-      <!-- TALL — Diwali -->
-      <div class="occ-card tall sr">
-        <div class="occ-img gi-diwali img-wrap">
-          <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=700&q=80&auto=format&fit=crop"
-               alt="Diwali Gifts" onerror="this.style.display='none'"/>
-          <div class="img-art"><div class="img-art-icon">🪔</div><div class="img-art-label">Diwali &amp; Festive</div></div>
-          <div class="occ-overlay"></div>
+    <header class="hero">
+        <div class="wrap hero-wrap">
+            <div class="hero-l sr">
+                <div class="badge-pill">Curated in Jaipur ✨</div>
+                <h1 class="hero-h1">Elevate the art of <br><em class="gold-text">gifting.</em></h1>
+                <p class="hero-sub">Discover our exclusive 2025 Diwali Catalogue and Corporate Hampers. Thoughtfully curated, luxuriously packaged.</p>
+                <div class="hero-btns">
+                    <a href="#" onclick="openModal('Diwali 2025 Catalogue', 'Festive Collection', 'pdf', 'assets/2025 Diwali catalogue.pdf'); return false;" class="btn btn-gold">View Diwali Catalogue</a>
+                    <a href="#corporate" class="btn btn-outline">Corporate Services</a>
+                </div>
+            </div>
+            
+            <div class="hero-r sr-delay">
+                <div class="img-wrap shadow-glow radius-large">
+                    <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=800&auto=format&fit=crop" alt="Luxury Gift Box"/>
+                    <div class="glass-badge">
+                        <span class="badge-icon">✨</span>
+                        <div>
+                            <div class="badge-label">2025 Collection</div>
+                            <div class="badge-title">The Royal Opulence</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="occ-body"><div class="occ-icon">🪔</div><div class="occ-name">Diwali &<br>Festive</div><div class="occ-count">24 Hampers</div></div>
-        <div class="occ-arrow">↗</div>
-      </div>
+    </header>
 
-      <!-- Birthday -->
-      <div class="occ-card sr" style="transition-delay:.06s">
-        <div class="occ-img gi-birthday img-wrap">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80&auto=format&fit=crop"
-               alt="Birthday Gifts" onerror="this.style.display='none'"/>
-          <div class="img-art"><div class="img-art-icon">🎂</div><div class="img-art-label">Birthday</div></div>
-          <div class="occ-overlay"></div>
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span>LUXURY PACKAGING</span> • <span>PAN-INDIA DELIVERY</span> • <span>CUSTOM BRANDING</span> • <span>HANDWRITTEN NOTES</span> • <span>PREMIUM SOURCING</span> • 
+            <span>LUXURY PACKAGING</span> • <span>PAN-INDIA DELIVERY</span> • <span>CUSTOM BRANDING</span> • <span>HANDWRITTEN NOTES</span> • <span>PREMIUM SOURCING</span> • 
         </div>
-        <div class="occ-body"><div class="occ-icon">🎂</div><div class="occ-name">Birthday</div><div class="occ-count">18 Hampers</div></div>
-        <div class="occ-arrow">↗</div>
-      </div>
-
-      <!-- Wedding -->
-      <div class="occ-card sr" style="transition-delay:.1s">
-        <div class="occ-img gi-wedding img-wrap">
-          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=500&q=80&auto=format&fit=crop"
-               alt="Wedding Gifts" onerror="this.style.display='none'"/>
-          <div class="img-art"><div class="img-art-icon">💍</div><div class="img-art-label">Wedding</div></div>
-          <div class="occ-overlay"></div>
-        </div>
-        <div class="occ-body"><div class="occ-icon">💍</div><div class="occ-name">Wedding</div><div class="occ-count">12 Hampers</div></div>
-        <div class="occ-arrow">↗</div>
-      </div>
-
-      <!-- Corporate -->
-      <div class="occ-card sr" style="transition-delay:.14s">
-        <div class="occ-img gi-corporate img-wrap">
-          <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=500&q=80&auto=format&fit=crop"
-               alt="Corporate Gifts" onerror="this.style.display='none'"/>
-          <div class="img-art"><div class="img-art-icon">🏢</div><div class="img-art-label">Corporate</div></div>
-          <div class="occ-overlay"></div>
-        </div>
-        <div class="occ-body"><div class="occ-icon">🏢</div><div class="occ-name">Corporate</div><div class="occ-count">30 Hampers</div></div>
-        <div class="occ-arrow">↗</div>
-      </div>
-
-      <!-- Anniversary -->
-      <div class="occ-card sr" style="transition-delay:.18s">
-        <div class="occ-img gi-love img-wrap">
-          <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500&q=80&auto=format&fit=crop"
-               alt="Anniversary Gifts" onerror="this.style.display='none'"/>
-          <div class="img-art"><div class="img-art-icon">💝</div><div class="img-art-label">Anniversary</div></div>
-          <div class="occ-overlay"></div>
-        </div>
-        <div class="occ-body"><div class="occ-icon">💝</div><div class="occ-name">Anniversary</div><div class="occ-count">10 Hampers</div></div>
-        <div class="occ-arrow">↗</div>
-      </div>
-
-      <!-- New Baby -->
-      <div class="occ-card sr" style="transition-delay:.22s">
-        <div class="occ-img gi-baby img-wrap">
-          <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&q=80&auto=format&fit=crop"
-               alt="Baby Gifts" onerror="this.style.display='none'"/>
-          <div class="img-art"><div class="img-art-icon">🌱</div><div class="img-art-label">New Baby</div></div>
-          <div class="occ-overlay"></div>
-        </div>
-        <div class="occ-body"><div class="occ-icon">🌱</div><div class="occ-name">New Baby</div><div class="occ-count">8 Hampers</div></div>
-        <div class="occ-arrow">↗</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     GIFT FINDER
-══════════════════════════════════════ -->
-<section class="finder" id="finder">
-  <div class="wrap">
-    <div class="finder-in">
-      <div class="finder-copy sr">
-        <span class="eyebrow">Smart Gift Finder</span>
-        <h2 class="heading" style="color:var(--c-bg)">Let us find your perfect gift.</h2>
-        <p class="sub" style="color:rgba(250,246,241,.5)">Tell us about the occasion and recipient — we'll match you with something truly special.</p>
-        <div class="finder-perks">
-          <div class="perk"><span class="perk-ico">🎯</span> Personalised recommendations</div>
-          <div class="perk"><span class="perk-ico">💰</span> Every budget covered</div>
-          <div class="perk"><span class="perk-ico">🚀</span> Pan-India delivery in 2–4 days</div>
-          <div class="perk"><span class="perk-ico">✍️</span> Handwritten notes included</div>
-        </div>
-      </div>
-      <div class="finder-box sr" style="transition-delay:.15s">
-        <p class="finder-box-title">Find the Perfect Gift ✨</p>
-        <div class="fgrid">
-          <div class="fg"><label>Occasion</label>
-            <select id="fOcc"><option value="">Select occasion</option><option>Diwali / Festive</option><option>Birthday</option><option>Wedding</option><option>Corporate Gift</option><option>Anniversary</option><option>New Baby</option><option>Thank You</option><option>Housewarming</option></select>
-          </div>
-          <div class="fg"><label>Recipient</label>
-            <select id="fRel"><option value="">Who is it for?</option><option>Friend</option><option>Partner / Spouse</option><option>Parents</option><option>Colleague</option><option>Client / Boss</option><option>Sibling</option><option>Child</option></select>
-          </div>
-          <div class="fg"><label>Budget (₹)</label>
-            <select id="fBud"><option value="">Select budget</option><option>Under ₹999</option><option>₹999 – ₹1,999</option><option>₹2,000 – ₹4,999</option><option>₹5,000 – ₹9,999</option><option>₹10,000+</option></select>
-          </div>
-          <div class="fg"><label>Vibe</label>
-            <select id="fVib"><option value="">Choose a vibe</option><option>Luxurious & Premium</option><option>Sweet & Cosy</option><option>Traditional & Cultural</option><option>Wellness & Self-care</option><option>Minimal & Modern</option></select>
-          </div>
-        </div>
-        <button class="finder-btn" onclick="runFinder()">✨ Find My Perfect Gift</button>
-        <div id="fres"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     PRODUCTS
-══════════════════════════════════════ -->
-<section class="products" id="collections">
-  <div class="wrap">
-    <div class="sec-hd">
-      <div>
-        <span class="eyebrow">Our Collections</span>
-        <h2 class="heading">Trending Hampers<br>this Season</h2>
-      </div>
-    </div>
-    <div class="tabs">
-      <button class="tab on" onclick="filterTab(this,'all')">All Collections</button>
-      <button class="tab" onclick="filterTab(this,'festive')">Festive</button>
-      <button class="tab" onclick="filterTab(this,'corporate')">Corporate</button>
-      <button class="tab" onclick="filterTab(this,'premium')">Premium</button>
     </div>
 
-    <div class="pgrid" id="pgrid">
+    <section class="section" id="collections">
+        <div class="wrap">
+            <div class="sec-hd text-center sr">
+                <span class="eyebrow">The 2025 Edit</span>
+                <h2 class="heading">Our Catalogues & Hampers</h2>
+            </div>
 
-      <!-- 1 — Golden Glow -->
-      <div class="pc sr" data-cat="festive">
-        <div class="pc-img">
-          <div class="img-wrap gi-diwali" style="width:100%;height:100%">
-            <div class="img-art"><div class="img-art-icon">🪔</div><div class="img-art-label">Golden Glow</div></div>
-            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&q=80&auto=format&fit=crop"
-                 alt="Golden Glow Hamper" onerror="this.style.display='none'"
-                 style="position:absolute;inset:0;width:100%;height:100%"/>
-          </div>
-          <span class="pc-badge bg-gold">Bestseller</span>
-          <div class="pc-acts"><button class="pc-act">♡</button><button class="pc-act">⊕</button></div>
-        </div>
-        <div class="pc-body">
-          <div class="pc-coll">Diwali Dazzel Hamper</div>
-          <div class="pc-name">The Golden Glow Gift Box</div>
-          <div class="pc-desc">Lantern, diyas, artisan dry fruits & more — wrapped in festive gold packaging.</div>
-          <div class="pc-ft"><div class="pc-price">₹2,499 <span>onwards</span></div><button class="pc-add" onclick="addToCart(this)">+</button></div>
-        </div>
-      </div>
+            <div class="pgrid mt-3">
+                <div class="pc-card sr">
+                    <div class="pc-img">
+                        <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=600&auto=format&fit=crop" alt="Diwali Festive Theme"/>
+                        <div class="card-overlay">
+                            <button class="btn btn-gold btn-sm" onclick="openModal('Diwali 2025 Catalogue', 'Explore our complete festive range', 'pdf', 'assets/2025 Diwali catalogue.pdf')">Read PDF Catalogue</button>
+                        </div>
+                    </div>
+                    <div class="pc-body">
+                        <div class="pc-cat">Interactive Document</div>
+                        <div class="pc-name">2025 Diwali Catalogue</div>
+                        <div class="pc-price" style="color: var(--gold-solid);">Click to Open PDF</div>
+                    </div>
+                </div>
+                
+                <div class="pc-card sr-delay">
+                    <div class="pc-img">
+                        <img src="https://images.unsplash.com/photo-1586769852044-692d6e3703f0?q=80&w=600&auto=format&fit=crop" alt="Corporate B2B Theme"/>
+                        <div class="card-overlay">
+                            <button class="btn btn-gold btn-sm" onclick="openModal('Corporate Hampers', 'B2B Custom Gifting Solutions', 'pdf', 'assets/Corporate Hampers.pdf')">Read PDF Catalogue</button>
+                        </div>
+                    </div>
+                    <div class="pc-body">
+                        <div class="pc-cat">Interactive Document</div>
+                        <div class="pc-name">Corporate Hampers</div>
+                        <div class="pc-price" style="color: var(--gold-solid);">Click to Open PDF</div>
+                    </div>
+                </div>
 
-      <!-- 2 — Serene Soiree -->
-      <div class="pc sr" data-cat="festive" style="transition-delay:.06s">
-        <div class="pc-img">
-          <div class="img-wrap gi-blush" style="width:100%;height:100%">
-            <div class="img-art"><div class="img-art-icon">🌸</div><div class="img-art-label">Serene Soirée</div></div>
-            <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=600&q=80&auto=format&fit=crop"
-                 alt="Serene Soiree" onerror="this.style.display='none'"
-                 style="position:absolute;inset:0;width:100%;height:100%"/>
-          </div>
-          <span class="pc-badge bg-dark">New Arrival</span>
-          <div class="pc-acts"><button class="pc-act">♡</button><button class="pc-act">⊕</button></div>
+                <div class="pc-card sr-delay-2">
+                    <div class="pc-img">
+                        <img src="https://images.unsplash.com/photo-1583394293214-0b3c4984bfd1?q=80&w=600&auto=format&fit=crop" alt="The Auspicious Edit"/>
+                        <div class="card-overlay">
+                            <button class="btn btn-gold btn-sm" onclick="openModal('The Auspicious Edit', 'Diwali 2025 Exclusive', 'image', 'https://images.unsplash.com/photo-1583394293214-0b3c4984bfd1?q=80&w=800&auto=format&fit=crop')">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="pc-body">
+                        <div class="pc-cat">Physical Hamper</div>
+                        <div class="pc-name">The Auspicious Edit</div>
+                        <div class="pc-price">Enquire for Pricing</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="pc-body">
-          <div class="pc-coll">Serene Festive Soirees</div>
-          <div class="pc-name">The Blush Soirée Box</div>
-          <div class="pc-desc">Silk-wrapped ensemble with floral accents, candles & artisan sweets.</div>
-          <div class="pc-ft"><div class="pc-price">₹1,799 <span>onwards</span></div><button class="pc-add" onclick="addToCart(this)">+</button></div>
-        </div>
-      </div>
+    </section>
 
-      <!-- 3 — Corporate Kit -->
-      <div class="pc sr" data-cat="corporate" style="transition-delay:.12s">
-        <div class="pc-img">
-          <div class="img-wrap gi-corporate" style="width:100%;height:100%">
-            <div class="img-art"><div class="img-art-icon">📒</div><div class="img-art-label">Corporate Kit</div></div>
-            <img src="https://images.unsplash.com/photo-1586769852044-692d6e3703f0?w=600&q=80&auto=format&fit=crop"
-                 alt="Corporate Hamper" onerror="this.style.display='none'"
-                 style="position:absolute;inset:0;width:100%;height:100%"/>
-          </div>
-          <span class="pc-badge bg-dark">Corporate</span>
-          <div class="pc-acts"><button class="pc-act">♡</button><button class="pc-act">⊕</button></div>
+    <section class="section corporate-sec" id="corporate">
+        <div class="wrap corp-grid">
+            <div class="corp-img-wrap sr">
+                 <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=800&auto=format&fit=crop" alt="Corporate Gifting" class="radius-large shadow-glow"/>
+            </div>
+            <div class="corp-content sr-delay">
+                <span class="eyebrow">B2B Solutions</span>
+                <h2 class="heading">Corporate Gifting,<br>Perfected.</h2>
+                <p class="sub-text mt-2">Strengthen client relationships and reward your team with our premium, custom-branded corporate hampers. We handle everything from curation to pan-India delivery.</p>
+                <ul class="corp-features mt-2">
+                    <li>✓ Custom Logo Branding on Boxes</li>
+                    <li>✓ Tiered Bulk Order Discounts</li>
+                    <li>✓ Dedicated Account Manager</li>
+                </ul>
+                <a href="#" onclick="openModal('Corporate Hampers', 'B2B Gifting', 'pdf', 'assets/Corporate Hampers.pdf'); return false;" class="btn btn-gold mt-3">Open Corporate PDF</a>
+            </div>
         </div>
-        <div class="pc-body">
-          <div class="pc-coll">Corporate Hampers</div>
-          <div class="pc-name">The Joyous Junction Kit</div>
-          <div class="pc-desc">Daily planner, premium coffee, snacks & branded merchandise — perfect for teams.</div>
-          <div class="pc-ft"><div class="pc-price">₹1,299 <span>per unit</span></div><button class="pc-add" onclick="addToCart(this)">+</button></div>
-        </div>
-      </div>
+    </section>
 
-      <!-- 4 — Auspicious Edit -->
-      <div class="pc sr" data-cat="premium" style="transition-delay:.18s">
-        <div class="pc-img">
-          <div class="img-wrap gi-gold" style="width:100%;height:100%">
-            <div class="img-art"><div class="img-art-icon">🏺</div><div class="img-art-label">Auspicious Edit</div></div>
-            <img src="https://images.unsplash.com/photo-1583394293214-0b3c4984bfd1?w=600&q=80&auto=format&fit=crop"
-                 alt="Auspicious Edit" onerror="this.style.display='none'"
-                 style="position:absolute;inset:0;width:100%;height:100%"/>
-          </div>
-          <span class="pc-badge bg-blush">Premium</span>
-          <div class="pc-acts"><button class="pc-act">♡</button><button class="pc-act">⊕</button></div>
+    <footer class="footer">
+        <div class="wrap text-center">
+            <h2 class="footer-logo">The Amore Giftings</h2>
+            <p class="footer-sub">Curated with Love in Jaipur</p>
+            <div class="footer-links">
+                <a href="mailto:corporate@theamoregiftings.in">corporate@theamoregiftings.in</a>
+                <span class="divider">•</span>
+                <a href="tel:+917976582327">+91 79765 82327</a>
+            </div>
+            <p class="mt-3" style="font-size: 13px; color: var(--text-muted);">© 2026 The Amore Giftings. All rights reserved.</p>
         </div>
-        <div class="pc-body">
-          <div class="pc-coll">Spark & Splendor Hamper</div>
-          <div class="pc-name">The Auspicious Edit</div>
-          <div class="pc-desc">Copper serveware, premium dry fruits, lotus diyas & handwritten card.</div>
-          <div class="pc-ft"><div class="pc-price">₹3,999 <span>onwards</span></div><button class="pc-add" onclick="addToCart(this)">+</button></div>
-        </div>
-      </div>
+    </footer>
 
-      <!-- 5 — Harmony Hamper -->
-      <div class="pc sr" data-cat="festive" style="transition-delay:.24s">
-        <div class="pc-img">
-          <div class="img-wrap gi-teal" style="width:100%;height:100%">
-            <div class="img-art"><div class="img-art-icon">🎊</div><div class="img-art-label">Harmony Hamper</div></div>
-            <img src="https://images.unsplash.com/photo-1512909006721-3d6018887383?w=600&q=80&auto=format&fit=crop"
-                 alt="Harmony Hamper" onerror="this.style.display='none'"
-                 style="position:absolute;inset:0;width:100%;height:100%"/>
-          </div>
-          <span class="pc-badge bg-gold">Popular</span>
-          <div class="pc-acts"><button class="pc-act">♡</button><button class="pc-act">⊕</button></div>
-        </div>
-        <div class="pc-body">
-          <div class="pc-coll">Harmony Hamper</div>
-          <div class="pc-name">Sweet Savory Festive Set</div>
-          <div class="pc-desc">Navatan namkeen, choco crackers, rangoli kit & diya — all in one box.</div>
-          <div class="pc-ft"><div class="pc-price">₹1,499 <span>onwards</span></div><button class="pc-add" onclick="addToCart(this)">+</button></div>
-        </div>
-      </div>
+    <div id="quickViewModal" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content" id="modalContentBlock">
+            <button class="modal-close" onclick="closeModal(event, true)">✕</button>
+            
+            <div style="padding: 20px 30px; border-bottom: 1px solid rgba(212,175,55,0.2); display: flex; justify-content: space-between; align-items: center; background: rgba(10,10,10,0.8);">
+                <div>
+                    <span id="modalCat" class="pc-cat" style="margin-bottom: 5px;"></span>
+                    <h2 id="modalName" class="heading" style="margin: 0; font-size: 1.8rem;"></h2>
+                </div>
+                <a href="mailto:corporate@theamoregiftings.in" class="btn btn-gold btn-sm" style="margin: 0;">Enquire</a>
+            </div>
 
-      <!-- 6 — Box of Bliss -->
-      <div class="pc sr" data-cat="festive" style="transition-delay:.30s">
-        <div class="pc-img">
-          <div class="img-wrap gi-birthday" style="width:100%;height:100%">
-            <div class="img-art"><div class="img-art-icon">🎁</div><div class="img-art-label">Box of Bliss</div></div>
-            <img src="https://images.unsplash.com/photo-1607082347283-2b07e6ab5b26?w=600&q=80&auto=format&fit=crop"
-                 alt="Box of Bliss" onerror="this.style.display='none'"
-                 style="position:absolute;inset:0;width:100%;height:100%"/>
-          </div>
-          <span class="pc-badge bg-dark">Diwali Special</span>
-          <div class="pc-acts"><button class="pc-act">♡</button><button class="pc-act">⊕</button></div>
+            <div class="modal-dynamic-body" id="modalDynamicBody">
+                </div>
         </div>
-        <div class="pc-body">
-          <div class="pc-coll">Box of Bliss</div>
-          <div class="pc-name">Shubh Shagum Box</div>
-          <div class="pc-desc">Potli bags, dry fruits, copper tumbler set & premium festive sweets.</div>
-          <div class="pc-ft"><div class="pc-price">₹2,199 <span>onwards</span></div><button class="pc-add" onclick="addToCart(this)">+</button></div>
-        </div>
-      </div>
-
-      <!-- 7 — Utsav Premium -->
-      <div class="pc sr" data-cat="premium" style="transition-delay:.36s">
-        <div class="pc-img">
-          <div class="img-wrap gi-wedding" style="width:100%;height:100%">
-            <div class="img-art"><div class="img-art-icon">🫙</div><div class="img-art-label">Utsav Premium</div></div>
-            <img src="https://images.unsplash.com/photo-1576022162027-4b2cac8a255b?w=600&q=80&auto=format&fit=crop"
-                 alt="Utsav Box" onerror="this.style.display='none'"
-                 style="position:absolute;inset:0;width:100%;height:100%"/>
-          </div>
-          <span class="pc-badge bg-dark">Corporate</span>
-          <div class="pc-acts"><button class="pc-act">♡</button><button class="pc-act">⊕</button></div>
-        </div>
-        <div class="pc-body">
-          <div class="pc-coll">Diwali Signature Collection</div>
-          <div class="pc-name">The Utsav Box Premium</div>
-          <div class="pc-desc">Copper bottle + glasses, spice tubes, Ganesha idol & handwoven wrapping.</div>
-          <div class="pc-ft"><div class="pc-price">₹4,499 <span>onwards</span></div><button class="pc-add" onclick="addToCart(this)">+</button></div>
-        </div>
-      </div>
-
-      <!-- 8 — Festive Limelight -->
-      <div class="pc sr" data-cat="festive" style="transition-delay:.42s">
-        <div class="pc-img">
-          <div class="img-wrap gi-love" style="width:100%;height:100%">
-            <div class="img-art"><div class="img-art-icon">✨</div><div class="img-art-label">Festive Limelight</div></div>
-            <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&q=80&auto=format&fit=crop"
-                 alt="Festive Limelight" onerror="this.style.display='none'"
-                 style="position:absolute;inset:0;width:100%;height:100%"/>
-          </div>
-          <span class="pc-badge bg-gold">Trending</span>
-          <div class="pc-acts"><button class="pc-act">♡</button><button class="pc-act">⊕</button></div>
-        </div>
-        <div class="pc-body">
-          <div class="pc-coll">Festive Limelight</div>
-          <div class="pc-name">The Limelight Edition</div>
-          <div class="pc-desc">Premium tea tins, bath bar, journal & festive chocolates in a silk-lined box.</div>
-          <div class="pc-ft"><div class="pc-price">₹1,999 <span>onwards</span></div><button class="pc-add" onclick="addToCart(this)">+</button></div>
-        </div>
-      </div>
-
     </div>
-  </div>
-</section>
 
-<!-- ══════════════════════════════════════
-     HOW IT WORKS
-══════════════════════════════════════ -->
-<section class="hiw" id="about">
-  <div class="wrap">
-    <div style="text-align:center;max-width:520px;margin:0 auto">
-      <span class="eyebrow">How it Works</span>
-      <h2 class="heading">From curation<br>to your doorstep.</h2>
-    </div>
-    <div class="hiw-grid">
-      <div class="step sr"><div class="step-ico-w"><span class="step-ico">🎯</span></div><h3 class="step-title">Choose</h3><p class="step-desc">Pick from our curated collections or use the Gift Finder for personalised suggestions.</p></div>
-      <div class="step sr" style="transition-delay:.1s"><div class="step-ico-w"><span class="step-ico">✍️</span></div><h3 class="step-title">Personalise</h3><p class="step-desc">Add a handwritten note, choose packaging, and request custom branding if needed.</p></div>
-      <div class="step sr" style="transition-delay:.2s"><div class="step-ico-w"><span class="step-ico">🎁</span></div><h3 class="step-title">We Curate</h3><p class="step-desc">Our team carefully assembles each hamper with love and meticulous attention to detail.</p></div>
-      <div class="step sr" style="transition-delay:.3s"><div class="step-ico-w"><span class="step-ico">🚀</span></div><h3 class="step-title">Delivered</h3><p class="step-desc">Fast, safe delivery across India — arrives in premium packaging that looks impeccable.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     CORPORATE
-══════════════════════════════════════ -->
-<section class="corp" id="corporate">
-  <div class="wrap">
-    <div class="corp-in">
-      <div class="sr">
-        <span class="pill" style="margin-bottom:20px">Corporate Gifting</span>
-        <h2 class="heading" style="margin-top:14px">Gift your team something<br>they'll actually love.</h2>
-        <p style="font-size:15px;color:var(--c-muted);line-height:1.75;margin-top:12px;max-width:480px">From onboarding kits to Diwali hampers for 500+ employees — we handle everything end-to-end. Custom branding, bulk pricing, seamless logistics.</p>
-        <ul class="corp-pts">
-          <li><span class="ck">✓</span> Minimum order: 25 units</li>
-          <li><span class="ck">✓</span> Custom logo & branding on every box</li>
-          <li><span class="ck">✓</span> Curated or fully custom hampers</li>
-          <li><span class="ck">✓</span> Pan-India bulk delivery</li>
-          <li><span class="ck">✓</span> Dedicated account manager</li>
-        </ul>
-        <div style="display:flex;gap:14px;flex-wrap:wrap">
-          <a href="mailto:corporate@theamoregiftings.in" class="btn btn-dark">Request a Quote <span class="ic">→</span></a>
-          <a href="tel:+917976582327" class="btn btn-outline">Call Us Now</a>
-        </div>
-      </div>
-
-      <div class="corp-imgs sr" style="transition-delay:.15s">
-        <!-- Corporate image mosaic (art fallback) -->
-        <div class="ci ci-a tall gi-corporate" style="display:flex;align-items:center;justify-content:center;position:relative">
-          <div class="img-art"><div class="img-art-icon">📦</div><div class="img-art-label">Corporate Gifting</div></div>
-          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80&auto=format&fit=crop"
-               alt="Corporate" onerror="this.style.display='none'"
-               style="position:absolute;inset:0;width:100%;height:100%;border-radius:26px"/>
-        </div>
-        <div class="ci ci-b gi-gold" style="display:flex;align-items:center;justify-content:center;position:relative">
-          <div class="img-art"><div class="img-art-icon">🎀</div><div class="img-art-label">Premium Box</div></div>
-          <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=400&q=80&auto=format&fit=crop"
-               alt="Gift box" onerror="this.style.display='none'"
-               style="position:absolute;inset:0;width:100%;height:100%;border-radius:20px"/>
-        </div>
-        <div class="ci ci-c gi-diwali" style="display:flex;align-items:center;justify-content:center;position:relative">
-          <div class="img-art"><div class="img-art-icon">🪔</div><div class="img-art-label">Diwali Hamper</div></div>
-          <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400&q=80&auto=format&fit=crop"
-               alt="Diwali" onerror="this.style.display='none'"
-               style="position:absolute;inset:0;width:100%;height:100%;border-radius:20px"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     TESTIMONIALS
-══════════════════════════════════════ -->
-<section class="testi">
-  <div class="wrap">
-    <div class="testi-hd sr">
-      <span class="eyebrow">What People Say</span>
-      <h2 class="heading">Gifting moments<br>that stayed with them.</h2>
-      <p class="sub">From first-time buyers to 500+ unit corporate orders — here's what our community says.</p>
-    </div>
-  </div>
-  <div class="testi-track-w">
-    <div class="testi-track">
-      <!-- 6 cards × 2 = 12 for seamless loop -->
-      <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"The Diwali hampers for my 80-person team were absolutely stunning. Everyone was talking about it for days. Packaging was flawless and delivery perfectly on time!"</p><div class="tc-auth"><div class="tc-av">🧑‍💼</div><div><div class="tc-n">Rahul Mehta</div><div class="tc-d">CEO, Jaipur Tech</div></div></div><div class="tc-occ">Corporate Diwali Hamper</div></div>
-      <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"I was blown away by the Serene Festive Soiree box. The silk wrapping, the little cards, the personal touch — it felt like a gift from a five-star luxury brand."</p><div class="tc-auth"><div class="tc-av">👩</div><div><div class="tc-n">Priya Sharma</div><div class="tc-d">Mumbai</div></div></div><div class="tc-occ">Serene Festive Soirees</div></div>
-      <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"Ordered the Shubh Shagum Box for my parents' anniversary. They were absolutely thrilled — the copper tumblers and sweets were exceptional quality!"</p><div class="tc-auth"><div class="tc-av">👨</div><div><div class="tc-n">Aryan Gupta</div><div class="tc-d">Delhi</div></div></div><div class="tc-occ">Shubh Shagum Box</div></div>
-      <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"The Amore team was incredibly helpful. I needed custom branding on 200 boxes for our product launch — they nailed every single detail. 10/10!"</p><div class="tc-auth"><div class="tc-av">👩‍💼</div><div><div class="tc-n">Sneha Kapoor</div><div class="tc-d">Founder, Kala Lifestyle</div></div></div><div class="tc-occ">Custom Corporate Hampers</div></div>
-      <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"My friend literally cried when she received the birthday hamper. The handwritten note, the blush packaging, the little extras — it felt so thoughtful and personal."</p><div class="tc-auth"><div class="tc-av">👧</div><div><div class="tc-n">Meera Joshi</div><div class="tc-d">Pune</div></div></div><div class="tc-occ">Birthday Hamper</div></div>
-      <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"Best gifting company I've ever worked with. Quality-to-price ratio is unbeatable and the team responds instantly. Already on my 4th order this year!"</p><div class="tc-auth"><div class="tc-av">🧔</div><div><div class="tc-n">Vikram Singh</div><div class="tc-d">Udaipur</div></div></div><div class="tc-occ">Diwali Signature Collection</div></div>
-      <!-- duplicate -->
-      <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"The Diwali hampers for my 80-person team were absolutely stunning. Everyone was talking about it for days. Packaging was flawless and delivery perfectly on time!"</p><div class="tc-auth"><div class="tc-av">🧑‍💼</div><div><div class="tc-n">Rahul Mehta</div><div class="tc-d">CEO, Jaipur Tech</div></div></div><div class="tc-occ">Corporate Diwali Hamper</div></div>
-      <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"I was blown away by the Serene Festive Soiree box. The silk wrapping, the little cards, the personal touch — it felt like a gift from a five-star luxury brand."</p><div class="tc-auth"><div class="tc-av">👩</div><div><div class="tc-n">Priya Sharma</div><div class="tc-d">Mumbai</div></div></div><div class="tc-occ">Serene Festive Soirees</div></div>
-      <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"Ordered the Shubh Shagum Box for my parents' anniversary. They were absolutely thrilled — the copper tumblers and sweets were exceptional quality!"</p><div class="tc-auth"><div class="tc-av">👨</div><div><div class="tc-n">Aryan Gupta</div><div class="tc-d">Delhi</div></div></div><div class="tc-occ">Shubh Shagum Box</div></div>
-      <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"The Amore team was incredibly helpful. I needed custom branding on 200 boxes for our product launch — they nailed every single detail. 10/10!"</p><div class="tc-auth"><div class="tc-av">👩‍💼</div><div><div class="tc-n">Sneha Kapoor</div><div class="tc-d">Founder, Kala Lifestyle</div></div></div><div class="tc-occ">Custom Corporate Hampers</div></div>
-      <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"My friend literally cried when she received the birthday hamper. The handwritten note, the blush packaging, the little extras — it felt so thoughtful and personal."</p><div class="tc-auth"><div class="tc-av">👧</div><div><div class="tc-n">Meera Joshi</div><div class="tc-d">Pune</div></div></div><div class="tc-occ">Birthday Hamper</div></div>
-      <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"Best gifting company I've ever worked with. Quality-to-price ratio is unbeatable and the team responds instantly. Already on my 4th order this year!"</p><div class="tc-auth"><div class="tc-av">🧔</div><div><div class="tc-n">Vikram Singh</div><div class="tc-d">Udaipur</div></div></div><div class="tc-occ">Diwali Signature Collection</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     CTA STRIP
-══════════════════════════════════════ -->
-<section class="cta-strip">
-  <div class="wrap">
-    <div class="cta-in sr">
-      <span class="eyebrow" style="color:var(--c-gold2);display:block;text-align:center">Stay Connected</span>
-      <h2 class="cta-title">Be the first to discover <em>new collections.</em></h2>
-      <p class="cta-sub">Join 8,000+ gifting enthusiasts. Get exclusive launches, festive discounts & curated ideas.</p>
-      <div class="nl-form">
-        <input type="email" class="nl-in" placeholder="Your email address..." id="nlemail"/>
-        <button class="nl-btn" onclick="subscribe()">Subscribe</button>
-      </div>
-      <div id="nlmsg"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     FOOTER
-══════════════════════════════════════ -->
-<footer>
-  <div class="wrap">
-    <div class="ft-top">
-      <div>
-        <div class="ft-brand-name">The Amore<br>Giftings</div>
-        <div class="ft-brand-tag">Curated with Love ♥</div>
-        <p class="ft-brand-desc">Jaipur-based premium gifting studio crafting extraordinary moments through thoughtfully curated hampers for every occasion.</p>
-        <div class="ft-soc">
-          <a href="#" class="fs" title="Instagram">📷</a>
-          <a href="https://wa.me/917976582327" class="fs" title="WhatsApp">💬</a>
-          <a href="#" class="fs" title="Facebook">📘</a>
-          <a href="mailto:corporate@theamoregiftings.in" class="fs" title="Email">✉️</a>
-        </div>
-      </div>
-      <div>
-        <div class="ft-col-title">Explore</div>
-        <ul class="ft-links">
-          <li><a href="#occasions">Diwali Hampers</a></li>
-          <li><a href="#occasions">Birthday Gifts</a></li>
-          <li><a href="#occasions">Wedding Favours</a></li>
-          <li><a href="#occasions">Anniversary Boxes</a></li>
-          <li><a href="#occasions">New Baby Hampers</a></li>
-          <li><a href="#collections">All Collections</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="ft-col-title">Corporate</div>
-        <ul class="ft-links">
-          <li><a href="#corporate">Corporate Gifting</a></li>
-          <li><a href="#corporate">Bulk Orders (25+ units)</a></li>
-          <li><a href="#corporate">Custom Branding</a></li>
-          <li><a href="#corporate">Employee Gifting</a></li>
-          <li><a href="#corporate">Event Favours</a></li>
-          <li><a href="mailto:corporate@theamoregiftings.in">Get a Quote</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="ft-col-title">Contact Us</div>
-        <div class="ft-contact">
-          <div class="fc-item"><span>✉️</span><a href="mailto:corporate@theamoregiftings.in" style="color:inherit">corporate@theamoregiftings.in</a></div>
-          <div class="fc-item"><span>📞</span><a href="tel:+917976582327" style="color:inherit">+91 79765 82327</a></div>
-          <div class="fc-item"><span>📞</span><a href="tel:+919414048243" style="color:inherit">+91 94140 48243</a></div>
-          <div class="fc-item"><span>📍</span>Jaipur, Rajasthan, India</div>
-        </div>
-        <div style="margin-top:22px">
-          <a href="mailto:corporate@theamoregiftings.in" class="btn btn-gold" style="padding:12px 24px;font-size:12px">Send Enquiry →</a>
-        </div>
-      </div>
-    </div>
-    <hr class="ft-div"/>
-    <div class="ft-bot">
-      <div class="ft-copy">© 2025 <strong>The Amore Giftings</strong>. Made in Jaipur 🌺 All rights reserved.</div>
-      <div class="ft-legal"><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#">Refund Policy</a></div>
-    </div>
-  </div>
-</footer>
-
-<button class="stt" id="stt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
-
-<!-- ══════════════════════════════════════
-     JAVASCRIPT
-══════════════════════════════════════ -->
-<script>
-/* ── Custom cursor ── */
-const dot = document.getElementById('cur-dot');
-const ring = document.getElementById('cur-ring');
-let mx=window.innerWidth/2,my=window.innerHeight/2,cx=mx,cy=my,rx=mx,ry=my;
-
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
-
-(function loop(){
-  cx+=(mx-cx)*.2; cy+=(my-cy)*.2;
-  rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
-  dot.style.left=cx+'px'; dot.style.top=cy+'px';
-  ring.style.left=rx+'px'; ring.style.top=ry+'px';
-  requestAnimationFrame(loop);
-})();
-
-/* ── Navbar ── */
-const nav=document.getElementById('nav');
-const sttBtn=document.getElementById('stt');
-window.addEventListener('scroll',()=>{
-  nav.classList.toggle('stuck',window.scrollY>60);
-  sttBtn.classList.toggle('vis',window.scrollY>400);
-});
-
-/* ── Scroll reveal ── */
-const srObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');srObs.unobserve(e.target)}});
-},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.sr').forEach(el=>srObs.observe(el));
-
-/* ── Mobile menu ── */
-const hbg=document.getElementById('hbg');
-const mobMenu=document.getElementById('mobMenu');
-const mobX=document.getElementById('mobX');
-hbg.addEventListener('click',()=>mobMenu.classList.add('open'));
-mobX.addEventListener('click',()=>mobMenu.classList.remove('open'));
-document.querySelectorAll('.mob-l').forEach(l=>l.addEventListener('click',()=>mobMenu.classList.remove('open')));
-
-/* ── Tab filter ── */
-function filterTab(btn,cat){
-  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  document.querySelectorAll('.pc').forEach(c=>{
-    const show=cat==='all'||c.dataset.cat===cat;
-    c.style.display=show?'':'none';
-    if(show)c.style.animation='fadeIn .4s ease both';
-  });
-}
-
-/* ── Add to cart feedback ── */
-function addToCart(btn){
-  btn.textContent='✓';
-  btn.style.background='var(--c-gold)';
-  setTimeout(()=>{btn.textContent='+';btn.style.background='';},1200);
-}
-
-/* ── Gift finder ── */
-function runFinder(){
-  const occ=document.getElementById('fOcc').value;
-  const rel=document.getElementById('fRel').value;
-  const bud=document.getElementById('fBud').value;
-  const el=document.getElementById('fres');
-  if(!occ||!rel||!bud){el.style.color='#E07060';el.textContent='⚠ Please fill in Occasion, Recipient and Budget.';return;}
-  const map={'Diwali / Festive':'Golden Glow Hamper or Diwali Dazzel Collection','Birthday':'Harmony Hamper or Shubh Shagum Box','Wedding':'Spark & Splendor Hamper or Utsav Box Premium','Corporate Gift':'Joyous Junction Kit or Diwali Signature Collection','Anniversary':'Serene Festive Soirees or Box of Bliss','New Baby':'Blush Soirée Box with personalised add-ons','Thank You':'Festive Limelight or Harmony Hamper','Housewarming':'Shubh Shagum Box or Auspicious Edit'};
-  const suggestion=map[occ]||'our curated seasonal collection';
-  el.style.color='rgba(250,246,241,.8)';
-  el.innerHTML=`✨ We recommend: <strong style="color:var(--c-gold2)">${suggestion}</strong> — perfect for ${rel.toLowerCase()} within ${bud}.`;
-}
-
-/* ── Newsletter ── */
-function subscribe(){
-  const email=document.getElementById('nlemail').value;
-  const msg=document.getElementById('nlmsg');
-  if(!email||!email.includes('@')){msg.style.color='#E07060';msg.textContent='Please enter a valid email address.';return;}
-  msg.style.color='var(--c-gold2)';
-  msg.textContent="🎉 You're in! Welcome to the Amore family.";
-  document.getElementById('nlemail').value='';
-}
-
-/* ── Fade in on page load ── */
-document.body.style.opacity='0';
-document.body.style.transition='opacity .5s';
-window.addEventListener('load',()=>{
-  document.body.style.opacity='1';
-  setTimeout(()=>document.querySelector('.hero .sr')?.classList.add('on'),200);
-});
-</script>
+    <script src="js/app.js"></script>
 </body>
 </html>
