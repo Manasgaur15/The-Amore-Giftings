@@ -4,51 +4,41 @@ import ScrollReveal from './ScrollReveal'
 const ease = [0.16, 1, 0.3, 1]
 
 const items = [
-  {
-    num:  '01',
-    name: 'Artisan Sourced',
-    body: 'Every product handpicked from local craftsmen across India — quality you can see, feel, and trust in every hamper.',
-  },
-  {
-    num:  '02',
-    name: 'Luxury Packaging',
-    body: 'Each box is designed in-house using premium materials. The unboxing experience is as memorable as the gift itself.',
-  },
-  {
-    num:  '03',
-    name: 'Pan-India Delivery',
-    body: 'From Jaipur to any corner of India, your hampers arrive safely, beautifully, and always on time.',
-  },
-  {
-    num:  '04',
-    name: 'Custom Branding',
-    body: 'Corporate orders include bespoke packaging, logo printing, and personalised messaging tailored to your identity.',
-  },
+  { ico: '🌿', title: 'Artisan Sourced',    body: 'Every product handpicked from local craftsmen across India — quality you can see and feel.' },
+  { ico: '📦', title: 'Luxury Packaging',   body: 'Each box designed in-house using premium materials. The unboxing is part of the gift.' },
+  { ico: '🚚', title: 'Pan-India Delivery', body: 'From Jaipur to every corner of India — safely delivered, on time, every time.' },
+  { ico: '🎨', title: 'Custom Branding',    body: 'Logo printing, ribbon branding, personalised messages — tailored to your identity.' },
 ]
 
 export default function Features() {
   return (
-    <section className="section features-v2" id="features">
+    <section className="section features-new" id="features">
       <div className="container">
 
-        <ScrollReveal className="section-head">
+        <ScrollReveal className="section-head text-center">
           <span className="eyebrow">Why Choose Us</span>
           <h2 className="section-title">
-            Crafted to <em>Perfection.</em>
+            Crafted with <em>Intention.</em>
           </h2>
+          <p className="section-sub">
+            Every detail matters. Here's what makes The Amore Giftings the preferred choice
+            for individuals and businesses across India.
+          </p>
         </ScrollReveal>
 
-        <div className="feat-list">
+        <div className="feat-grid-new">
           {items.map((item, i) => (
-            <ScrollReveal key={item.num} delay={i * 0.06}>
+            <ScrollReveal key={item.title} delay={i * 0.1}>
               <motion.div
-                className="feat-row"
-                whileHover={{ x: 14 }}
-                transition={{ duration: 0.38, ease }}
+                className="feat-card-new"
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.35, ease }}
               >
-                <span className="feat-num">{item.num}</span>
-                <h3 className="feat-name">{item.name}</h3>
-                <p className="feat-body">{item.body}</p>
+                <div className="feat-ico-wrap">
+                  <span className="feat-ico">{item.ico}</span>
+                </div>
+                <h3 className="feat-title-new">{item.title}</h3>
+                <p className="feat-body-new">{item.body}</p>
               </motion.div>
             </ScrollReveal>
           ))}

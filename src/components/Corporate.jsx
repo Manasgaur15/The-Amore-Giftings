@@ -93,7 +93,7 @@ export default function Corporate({ openModal }) {
           <div className="corp-visual">
             <div className="corp-img-wrap">
               <img
-                src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=900&auto=format&fit=crop"
+                src="/assets/corporate-photo.jpg"
                 alt="Corporate Gifting"
                 loading="lazy"
               />

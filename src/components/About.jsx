@@ -25,7 +25,7 @@ export default function About() {
         <div className="about-imgs">
           <motion.div className="ai-main" style={{ y: y1 }}>
             <img
-              src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800&auto=format&fit=crop"
+              src="/assets/diwali-photo.jpg"
               alt="Gift Hamper Curation"
               loading="lazy"
             />
@@ -34,7 +34,7 @@ export default function About() {
 
           <motion.div className="ai-accent" style={{ y: y2 }}>
             <img
-              src="https://images.unsplash.com/photo-1608755728617-aefab37d2edd?q=80&w=400&auto=format&fit=crop"
+              src="/assets/corporate-photo.jpg"
               alt="Premium Packaging"
               loading="lazy"
             />

@@ -1,122 +1,126 @@
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import MagBtn from './MagBtn'
 
 const ease = [0.16, 1, 0.3, 1]
 
-const containerV = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.11, delayChildren: 0.3 } },
-}
-const wordV = {
-  hidden: { opacity: 0, y: 110, skewY: 5 },
-  show:   { opacity: 1, y: 0, skewY: 0, transition: { duration: 1.1, ease } },
-}
 const fadeUp = (delay = 0) => ({
-  initial:    { opacity: 0, y: 28 },
+  initial:    { opacity: 0, y: 32 },
   animate:    { opacity: 1, y: 0 },
-  transition: { duration: 0.9, ease, delay },
+  transition: { duration: 0.85, ease, delay },
 })
 
 export default function Hero({ openModal }) {
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  const imgY     = useTransform(scrollYProgress, [0, 1], ['0%', '22%'])
-  const contentY = useTransform(scrollYProgress, [0, 0.6], ['0%', '12%'])
-  const opacity  = useTransform(scrollYProgress, [0, 0.55], [1, 0])
-
   return (
-    <section className="hero-cin" id="hero" ref={ref}>
+    <section className="hero-new" id="hero">
+      <div className="hn-deco-dots" />
+      <div className="hn-deco-ring" />
 
-      {/* ── Parallax background ── */}
-      <motion.div className="hc-bg" style={{ y: imgY }}>
-        <img
-          src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1920&auto=format&fit=crop"
-          alt=""
-          aria-hidden="true"
-        />
-      </motion.div>
+      <div className="container hn-inner">
 
-      {/* ── Overlay ── */}
-      <div className="hc-overlay" />
+        {/* ── Left: Content ── */}
+        <div className="hn-left">
+          <motion.div className="hn-pill" {...fadeUp(0.05)}>
+            <span className="hn-pill-dot" />
+            Curated in Jaipur · Est. 2020
+          </motion.div>
 
-      {/* ── Content ── */}
-      <motion.div className="hc-content" style={{ y: contentY, opacity }}>
+          <motion.h1 className="hn-title" {...fadeUp(0.18)}>
+            Gift Every<br />Moment<br />with <em>Love.</em>
+          </motion.h1>
 
-        <motion.div className="hc-kicker" {...fadeUp(0.05)}>
-          <span className="hc-line" />
-          Curated in Jaipur · Est. 2020 · Pan-India
-          <span className="hc-line" />
-        </motion.div>
+          <motion.p className="hn-sub" {...fadeUp(0.32)}>
+            Premium handcrafted hampers for life's most precious moments —
+            festive celebrations, corporate milestones, and everything in between.
+            Beautifully crafted in Jaipur.
+          </motion.p>
 
-        <motion.h1
-          className="hc-title"
-          variants={containerV}
-          initial="hidden"
-          animate="show"
+          <motion.div className="hn-btns" {...fadeUp(0.46)}>
+            <MagBtn
+              className="btn btn-gold btn-lg"
+              onClick={() =>
+                openModal(
+                  'Diwali 2025 Catalogue',
+                  'Festive Collection',
+                  'pdf',
+                  '/assets/2025 Diwali catalogue.pdf',
+                )
+              }
+            >
+              <span>View Catalogue</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </MagBtn>
+            <MagBtn className="btn btn-outline btn-lg" href="#collections">
+              Explore Collections
+            </MagBtn>
+          </motion.div>
+
+          <motion.div className="hn-stats" {...fadeUp(0.6)}>
+            <div className="hn-stat">
+              <span className="hn-stat-n">500+</span>
+              <span className="hn-stat-l">Happy Clients</span>
+            </div>
+            <span className="hn-stat-sep" />
+            <div className="hn-stat">
+              <span className="hn-stat-n">50+</span>
+              <span className="hn-stat-l">Premium Products</span>
+            </div>
+            <span className="hn-stat-sep" />
+            <div className="hn-stat">
+              <span className="hn-stat-n">5</span>
+              <span className="hn-stat-l">Years of Craft</span>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* ── Right: Visual ── */}
+        <motion.div
+          className="hn-right"
+          initial={{ opacity: 0, x: 48 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.2, duration: 1.0, ease }}
         >
-          <span className="hc-title-row">
-            {['The', 'Art', 'of'].map((w, i) => (
-              <motion.span key={i} className="hc-word" variants={wordV}>{w}</motion.span>
-            ))}
-          </span>
-          <motion.span className="hc-word hc-italic" variants={wordV}>
-            Gifting.
-          </motion.span>
-        </motion.h1>
+          <div className="hn-frame">
+            <img
+              src="/assets/diwali-photo.jpg"
+              alt="Luxury Gift Hamper by The Amore Giftings"
+              className="hn-img"
+              loading="eager"
+            />
 
-        <motion.p className="hc-sub" {...fadeUp(0.72)}>
-          Premium handcrafted hampers for life's most precious moments —
-          from festive celebrations to corporate milestones.
-        </motion.p>
+            {/* Floating card */}
+            <motion.div
+              className="hn-badge"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <span className="hn-badge-ico">✨</span>
+              <div>
+                <div className="hn-badge-title">2025 Collection</div>
+                <div className="hn-badge-sub">Now Available</div>
+              </div>
+            </motion.div>
 
-        <motion.div className="hc-btns" {...fadeUp(0.9)}>
-          <MagBtn
-            className="btn btn-gold btn-lg"
-            onClick={() =>
-              openModal(
-                'Diwali 2025 Catalogue',
-                'Festive Collection',
-                'pdf',
-                '/assets/2025 Diwali catalogue.pdf',
-              )
-            }
-          >
-            <span>View Catalogue</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-              <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </MagBtn>
-          <MagBtn className="btn btn-ghost btn-lg" href="#collections">
-            Explore Hampers
-          </MagBtn>
-        </motion.div>
-
-        <motion.div className="hc-stats" {...fadeUp(1.08)}>
-          <div className="hcs-item">
-            <span className="hcs-num">500+</span>
-            <span className="hcs-label">Happy Clients</span>
-          </div>
-          <span className="hcs-sep" />
-          <div className="hcs-item">
-            <span className="hcs-num">50+</span>
-            <span className="hcs-label">Premium Products</span>
-          </div>
-          <span className="hcs-sep" />
-          <div className="hcs-item">
-            <span className="hcs-num">5</span>
-            <span className="hcs-label">Years of Craft</span>
+            {/* Handcrafted badge */}
+            <motion.div
+              className="hn-craft"
+              animate={{ y: [0, -7, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+            >
+              <div className="hn-craft-n">100%</div>
+              <div className="hn-craft-l">Handcrafted</div>
+            </motion.div>
           </div>
         </motion.div>
 
-      </motion.div>
+      </div>
 
-      {/* ── Scroll hint ── */}
+      {/* Scroll hint */}
       <div className="scroll-hint">
         <div className="scroll-line" />
         <span>Scroll</span>
       </div>
-
     </section>
   )
 }

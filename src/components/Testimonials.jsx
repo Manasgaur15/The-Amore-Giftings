@@ -1,72 +1,70 @@
+import { motion } from 'framer-motion'
 import ScrollReveal from './ScrollReveal'
+
+const ease = [0.16, 1, 0.3, 1]
 
 const reviews = [
   {
     stars: 5,
-    quote: 'The Diwali hampers were absolutely stunning. Our clients were blown away by the packaging and quality of products inside.',
+    quote: 'The Diwali hampers were absolutely stunning. Our clients were blown away by the packaging and quality of products inside. Will definitely order again!',
     name:  'Riya Mehta',
     role:  'Marketing Head, TechVentures Ltd.',
+    init:  'R',
   },
   {
     stars: 5,
-    quote: 'We ordered 200 corporate hampers with custom branding. The entire experience was seamless and incredibly professional.',
+    quote: 'We ordered 200 corporate hampers with custom branding and the entire experience was seamless. The team at TAG is incredibly professional and detail-oriented.',
     name:  'Arjun Sharma',
     role:  'CEO, Pinnacle Realtors',
+    init:  'A',
   },
   {
     stars: 5,
-    quote: 'From Jaipur to Mumbai, delivered perfectly on time for our anniversary event. Luxurious yet deeply personal.',
+    quote: 'From Jaipur to Mumbai, delivered perfectly on time for our anniversary event. The hampers had that rare quality — luxurious yet deeply personal.',
     name:  'Priya Kapoor',
     role:  'Event Director, The Grand Events',
-  },
-  {
-    stars: 5,
-    quote: 'Exceptional quality and presentation. The attention to detail is unmatched. We order every festive season without fail.',
-    name:  'Vikram Joshi',
-    role:  'Director, Sunrise Enterprises',
-  },
-  {
-    stars: 5,
-    quote: 'Every hamper told a story. The craft and care put into each box is simply extraordinary. Truly a 5-star experience.',
-    name:  'Ananya Singh',
-    role:  'Creative Lead, DesignHub',
+    init:  'P',
   },
 ]
 
-function ReviewItem({ r }) {
-  return (
-    <div className="tmq-item">
-      <div className="tmq-stars">{'★'.repeat(r.stars)}</div>
-      <p className="tmq-quote">"{r.quote}"</p>
-      <div>
-        <span className="tmq-name">{r.name}</span>
-        <span className="tmq-role">{r.role}</span>
-      </div>
-    </div>
-  )
-}
-
 export default function Testimonials() {
-  const doubled = [...reviews, ...reviews]
-
   return (
-    <section className="section testimonials-v2" id="testimonials">
+    <section className="section testimonials-new" id="testimonials">
       <div className="container">
+
         <ScrollReveal className="section-head text-center">
           <span className="eyebrow">Client Love</span>
           <h2 className="section-title">
             What Our Clients <em>Say</em>
           </h2>
+          <p className="section-sub">
+            From personal celebrations to large-scale corporate orders — our clients trust us
+            with their most important moments.
+          </p>
         </ScrollReveal>
-      </div>
 
-      <div className="tmq-wrap">
-        <div className="tmq-track tmq-left">
-          {doubled.map((r, i) => <ReviewItem key={i} r={r} />)}
+        <div className="testi-grid-new">
+          {reviews.map((r, i) => (
+            <ScrollReveal key={r.name} delay={i * 0.12}>
+              <motion.div
+                className="testi-card-new"
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.35, ease }}
+              >
+                <div className="tc-stars">{'★'.repeat(r.stars)}</div>
+                <p className="tc-quote">{r.quote}</p>
+                <div className="tc-author">
+                  <div className="tc-avatar">{r.init}</div>
+                  <div>
+                    <span className="tc-name">{r.name}</span>
+                    <span className="tc-role">{r.role}</span>
+                  </div>
+                </div>
+              </motion.div>
+            </ScrollReveal>
+          ))}
         </div>
-        <div className="tmq-track tmq-right">
-          {doubled.map((r, i) => <ReviewItem key={i} r={r} />)}
-        </div>
+
       </div>
     </section>
   )
