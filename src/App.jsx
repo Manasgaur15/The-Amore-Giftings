@@ -25,6 +25,12 @@ export default function App() {
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'
+    // Fallback: force-show content after 4.5s in case onExitComplete doesn't fire
+    const fallback = setTimeout(() => {
+      setLoaded(true)
+      document.body.style.overflow = ''
+    }, 4500)
+    return () => clearTimeout(fallback)
   }, [])
 
   const handleLoaded = () => {
