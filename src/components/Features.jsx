@@ -1,67 +1,56 @@
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { motion } from 'framer-motion'
+import ScrollReveal from './ScrollReveal'
 
 const ease = [0.16, 1, 0.3, 1]
 
-const feats = [
-  { ico: '🌿', title: 'Artisan Sourced',    body: 'Every product in our hampers is thoughtfully sourced from local artisans and premium suppliers across India.' },
-  { ico: '✍️', title: 'Handwritten Notes',  body: 'Add a personal touch with custom handwritten messages — because every gift deserves a heartfelt word.' },
-  { ico: '🎨', title: 'Custom Branding',    body: 'Corporate clients enjoy bespoke logo printing, ribbon branding, and fully customised packaging solutions.' },
-  { ico: '🚀', title: 'Pan-India Delivery', body: 'Reliable, insured delivery to every corner of India. Your gift arrives beautifully — every single time.' },
+const items = [
+  {
+    num:  '01',
+    name: 'Artisan Sourced',
+    body: 'Every product handpicked from local craftsmen across India — quality you can see, feel, and trust in every hamper.',
+  },
+  {
+    num:  '02',
+    name: 'Luxury Packaging',
+    body: 'Each box is designed in-house using premium materials. The unboxing experience is as memorable as the gift itself.',
+  },
+  {
+    num:  '03',
+    name: 'Pan-India Delivery',
+    body: 'From Jaipur to any corner of India, your hampers arrive safely, beautifully, and always on time.',
+  },
+  {
+    num:  '04',
+    name: 'Custom Branding',
+    body: 'Corporate orders include bespoke packaging, logo printing, and personalised messaging tailored to your identity.',
+  },
 ]
 
-function FeatCard({ ico, title, body, index }) {
-  const ref    = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
-
-  return (
-    <motion.div
-      ref={ref}
-      className="feat-card"
-      initial={{ opacity: 0, y: 50 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.85, ease, delay: index * 0.12 }}
-      whileHover={{ y: -6, transition: { duration: 0.35, ease } }}
-    >
-      <div className="feat-ico-wrap">
-        <span className="feat-ico">{ico}</span>
-      </div>
-      <h3 className="feat-title">{title}</h3>
-      <p className="feat-body">{body}</p>
-    </motion.div>
-  )
-}
-
 export default function Features() {
-  const titleRef = useRef(null)
-  const inView   = useInView(titleRef, { once: true, margin: '-60px' })
-
   return (
-    <section className="section features" id="features">
+    <section className="section features-v2" id="features">
       <div className="container">
 
-        <div className="section-head text-center" ref={titleRef}>
-          <motion.span
-            className="eyebrow"
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, ease }}
-          >
-            Why Choose TAG
-          </motion.span>
-          <motion.h2
-            className="section-title"
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.85, ease, delay: 0.1 }}
-          >
-            Crafted with Intention,<br /><em>Delivered with Love.</em>
-          </motion.h2>
-        </div>
+        <ScrollReveal className="section-head">
+          <span className="eyebrow">Why Choose Us</span>
+          <h2 className="section-title">
+            Crafted to <em>Perfection.</em>
+          </h2>
+        </ScrollReveal>
 
-        <div className="feat-grid">
-          {feats.map((f, i) => (
-            <FeatCard key={f.title} {...f} index={i} />
+        <div className="feat-list">
+          {items.map((item, i) => (
+            <ScrollReveal key={item.num} delay={i * 0.06}>
+              <motion.div
+                className="feat-row"
+                whileHover={{ x: 14 }}
+                transition={{ duration: 0.38, ease }}
+              >
+                <span className="feat-num">{item.num}</span>
+                <h3 className="feat-name">{item.name}</h3>
+                <p className="feat-body">{item.body}</p>
+              </motion.div>
+            </ScrollReveal>
           ))}
         </div>
 

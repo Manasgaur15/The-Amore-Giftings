@@ -1,129 +1,72 @@
-import { useState, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import ScrollReveal from './ScrollReveal'
-
-const ease = [0.16, 1, 0.3, 1]
 
 const reviews = [
   {
     stars: 5,
-    quote: '"The Diwali hampers were absolutely stunning. Our clients were blown away by the packaging and the quality of products inside. Will definitely order again!"',
+    quote: 'The Diwali hampers were absolutely stunning. Our clients were blown away by the packaging and quality of products inside.',
     name:  'Riya Mehta',
     role:  'Marketing Head, TechVentures Ltd.',
-    init:  'R',
   },
   {
     stars: 5,
-    quote: '"We ordered 200 corporate hampers with custom branding and the entire experience was seamless. The team at TAG is incredibly professional and detail-oriented."',
+    quote: 'We ordered 200 corporate hampers with custom branding. The entire experience was seamless and incredibly professional.',
     name:  'Arjun Sharma',
     role:  'CEO, Pinnacle Realtors',
-    init:  'A',
   },
   {
     stars: 5,
-    quote: '"From Jaipur to Mumbai, delivered perfectly on time for our anniversary event. The hampers had that rare quality — luxurious yet personal. Absolutely loved it!"',
+    quote: 'From Jaipur to Mumbai, delivered perfectly on time for our anniversary event. Luxurious yet deeply personal.',
     name:  'Priya Kapoor',
     role:  'Event Director, The Grand Events',
-    init:  'P',
+  },
+  {
+    stars: 5,
+    quote: 'Exceptional quality and presentation. The attention to detail is unmatched. We order every festive season without fail.',
+    name:  'Vikram Joshi',
+    role:  'Director, Sunrise Enterprises',
+  },
+  {
+    stars: 5,
+    quote: 'Every hamper told a story. The craft and care put into each box is simply extraordinary. Truly a 5-star experience.',
+    name:  'Ananya Singh',
+    role:  'Creative Lead, DesignHub',
   },
 ]
 
-const slideV = {
-  enter: (dir) => ({ opacity: 0, x: dir > 0 ? 80 : -80 }),
-  center: { opacity: 1, x: 0, transition: { duration: 0.6, ease } },
-  exit:  (dir) => ({ opacity: 0, x: dir < 0 ? 80 : -80, transition: { duration: 0.4, ease } }),
+function ReviewItem({ r }) {
+  return (
+    <div className="tmq-item">
+      <div className="tmq-stars">{'★'.repeat(r.stars)}</div>
+      <p className="tmq-quote">"{r.quote}"</p>
+      <div>
+        <span className="tmq-name">{r.name}</span>
+        <span className="tmq-role">{r.role}</span>
+      </div>
+    </div>
+  )
 }
 
 export default function Testimonials() {
-  const [[idx, dir], setPage] = useState([0, 0])
-
-  const go = useCallback((newDir) => {
-    setPage(([i]) => {
-      const next = (i + newDir + reviews.length) % reviews.length
-      return [next, newDir]
-    })
-  }, [])
-
-  useEffect(() => {
-    const t = setInterval(() => go(1), 5000)
-    return () => clearInterval(t)
-  }, [go])
-
-  const r = reviews[idx]
+  const doubled = [...reviews, ...reviews]
 
   return (
-    <section className="section testimonials" id="testimonials">
+    <section className="section testimonials-v2" id="testimonials">
       <div className="container">
-
         <ScrollReveal className="section-head text-center">
           <span className="eyebrow">Client Love</span>
           <h2 className="section-title">
-            What Our Clients<br /><em>Say About Us</em>
+            What Our Clients <em>Say</em>
           </h2>
         </ScrollReveal>
+      </div>
 
-        {/* ── Desktop: 3-card grid ── */}
-        <div className="testi-grid">
-          {reviews.map((r, i) => (
-            <ScrollReveal key={r.name} delay={i * 0.12}>
-              <motion.div
-                className="testi-card"
-                whileHover={{ y: -6, boxShadow: '0 24px 72px rgba(0,0,0,0.55)', borderColor: 'rgba(212,175,55,0.14)' }}
-                transition={{ duration: 0.35, ease }}
-              >
-                <div className="tc-stars">{'★'.repeat(r.stars)}</div>
-                <p className="tc-quote">{r.quote}</p>
-                <div className="tc-author">
-                  <div className="tc-avatar">{r.init}</div>
-                  <div>
-                    <span className="tc-name">{r.name}</span>
-                    <span className="tc-role">{r.role}</span>
-                  </div>
-                </div>
-              </motion.div>
-            </ScrollReveal>
-          ))}
+      <div className="tmq-wrap">
+        <div className="tmq-track tmq-left">
+          {doubled.map((r, i) => <ReviewItem key={i} r={r} />)}
         </div>
-
-        {/* ── Mobile: animated slider ── */}
-        <div className="testi-slider">
-          <AnimatePresence mode="wait" custom={dir}>
-            <motion.div
-              key={idx}
-              className="testi-card"
-              custom={dir}
-              variants={slideV}
-              initial="enter"
-              animate="center"
-              exit="exit"
-            >
-              <div className="tc-stars">{'★'.repeat(r.stars)}</div>
-              <p className="tc-quote">{r.quote}</p>
-              <div className="tc-author">
-                <div className="tc-avatar">{r.init}</div>
-                <div>
-                  <span className="tc-name">{r.name}</span>
-                  <span className="tc-role">{r.role}</span>
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
-          <div className="ts-controls">
-            <button className="ts-btn" onClick={() => go(-1)}>←</button>
-            <div className="ts-dots">
-              {reviews.map((_, i) => (
-                <button
-                  key={i}
-                  className={`ts-dot ${i === idx ? 'active' : ''}`}
-                  onClick={() => setPage([i, i > idx ? 1 : -1])}
-                />
-              ))}
-            </div>
-            <button className="ts-btn" onClick={() => go(1)}>→</button>
-          </div>
+        <div className="tmq-track tmq-right">
+          {doubled.map((r, i) => <ReviewItem key={i} r={r} />)}
         </div>
-
       </div>
     </section>
   )
