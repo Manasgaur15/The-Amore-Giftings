@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState, useLayoutEffect } from 'react'
 import { motion } from 'framer-motion'
 import ScrollReveal from './ScrollReveal'
 
@@ -6,21 +6,21 @@ const ease = [0.16, 1, 0.3, 1]
 
 const cards = [
   {
-    img:   'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=800&auto=format&fit=crop',
+    img:   'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800&auto=format&fit=crop',
     cat:   'Festive',
     title: 'Festive Opulence',
     desc:  'Diwali 2025 Collection',
     modal: { name: 'Diwali 2025 Catalogue', cat: 'Festive Collection', type: 'pdf', src: '/assets/2025 Diwali catalogue.pdf' },
   },
   {
-    img:   'https://images.unsplash.com/photo-1586769852044-692d6e3703f0?q=80&w=800&auto=format&fit=crop',
+    img:   'https://images.unsplash.com/photo-1608755728617-aefab37d2edd?q=80&w=800&auto=format&fit=crop',
     cat:   'Corporate',
     title: 'Executive Suite',
     desc:  'B2B Gifting Solutions',
     modal: { name: 'Corporate Hampers', cat: 'B2B Gifting Solutions', type: 'pdf', src: '/assets/Corporate Hampers.pdf' },
   },
   {
-    img:   'https://images.unsplash.com/photo-1583394293214-0b3c4984bfd1?q=80&w=800&auto=format&fit=crop',
+    img:   'https://images.unsplash.com/photo-1512909006721-3d6018887383?q=80&w=800&auto=format&fit=crop',
     cat:   'Festive',
     title: 'Premium Festive Box',
     desc:  'Handcrafted with love',
@@ -34,7 +34,7 @@ const cards = [
     modal: { name: 'The Executive Suite', cat: 'Corporate Gifting', type: 'image', src: '/assets/corporate-photo.jpg' },
   },
   {
-    img:   'https://images.unsplash.com/photo-1512909006721-3d6018887383?q=80&w=800&auto=format&fit=crop',
+    img:   'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=800&auto=format&fit=crop',
     cat:   'Seasonal',
     title: 'Anniversary Edition',
     desc:  'For milestone moments',
@@ -43,7 +43,20 @@ const cards = [
 ]
 
 export default function Collections({ openModal }) {
-  const constraintRef = useRef(null)
+  const containerRef = useRef(null)
+  const trackRef     = useRef(null)
+  const [constraints, setConstraints] = useState({ left: -1400, right: 0 })
+
+  useLayoutEffect(() => {
+    const update = () => {
+      if (!containerRef.current || !trackRef.current) return
+      const overflow = trackRef.current.scrollWidth - containerRef.current.offsetWidth
+      setConstraints({ left: -Math.max(0, overflow), right: 0 })
+    }
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
 
   return (
     <section className="collections-v2" id="collections">
@@ -51,16 +64,18 @@ export default function Collections({ openModal }) {
         <ScrollReveal className="cv2-head">
           <span className="eyebrow">The 2025 Edit</span>
           <h2 className="section-title">Our <em>Collections</em></h2>
-          <p className="cv2-hint">— Drag to explore</p>
+          <p className="cv2-hint">— Drag to explore →</p>
         </ScrollReveal>
       </div>
 
-      <div className="cv2-drag-outer" ref={constraintRef}>
+      <div className="cv2-drag-outer" ref={containerRef}>
         <motion.div
+          ref={trackRef}
           className="cv2-track"
           drag="x"
-          dragConstraints={constraintRef}
-          dragElastic={0.04}
+          dragConstraints={constraints}
+          dragElastic={0.05}
+          dragTransition={{ bounceStiffness: 300, bounceDamping: 30 }}
           whileDrag={{ cursor: 'grabbing' }}
         >
           {cards.map((c, i) => (
