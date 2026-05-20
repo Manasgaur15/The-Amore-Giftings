@@ -6,30 +6,30 @@ const ease = [0.16, 1, 0.3, 1]
 
 const cards = [
   {
-    img:   '/assets/Festive Opulence.png',
+    img:   '/assets/Festive%20Opulence.png',
     tag:   'PDF Catalogue',
     cat:   'Festive',
     title: 'Festive Opulence',
-    modal: { name: 'Diwali 2025 Catalogue', cat: 'Festive Collection', type: 'pdf', src: '/assets/2025 Diwali catalogue.pdf' },
+    modal: { name: 'Diwali 2025 Catalogue', cat: 'Festive Collection', type: 'pdf', src: '/assets/2025%20Diwali%20catalogue.pdf' },
   },
   {
-    img:   '/assets/Executive Suite.png',
+    img:   '/assets/Executive%20Suite.png',
     tag:   'PDF Catalogue',
     cat:   'Corporate',
     title: 'Executive Suite',
-    modal: { name: 'Corporate Hampers', cat: 'B2B Gifting Solutions', type: 'pdf', src: '/assets/Corporate Hampers.pdf' },
+    modal: { name: 'Corporate Hampers', cat: 'B2B Gifting Solutions', type: 'pdf', src: '/assets/Corporate%20Hampers.pdf' },
   },
   {
-    img:   '/assets/Premium Festive Box.png',
+    img:   '/assets/Premium%20Festive%20Box.png',
     cat:   'Festive',
     title: 'Premium Festive Box',
-    modal: { name: 'Premium Festive Box', cat: 'Diwali 2025', type: 'image', src: '/assets/Premium Festive Box.png' },
+    modal: { name: 'Premium Festive Box', cat: 'Diwali 2025', type: 'image', src: '/assets/Premium%20Festive%20Box.png' },
   },
   {
-    img:   '/assets/The Boardroom Gift  Luxury executive gifting.png',
+    img:   '/assets/The%20Boardroom%20Gift%20%20Luxury%20executive%20gifting.png',
     cat:   'Corporate',
     title: 'The Boardroom Gift',
-    modal: { name: 'The Boardroom Gift', cat: 'Corporate Gifting', type: 'image', src: '/assets/The Boardroom Gift  Luxury executive gifting.png' },
+    modal: { name: 'The Boardroom Gift', cat: 'Corporate Gifting', type: 'image', src: '/assets/The%20Boardroom%20Gift%20%20Luxury%20executive%20gifting.png' },
   },
   {
     img:   '/assets/Anniversary.png',

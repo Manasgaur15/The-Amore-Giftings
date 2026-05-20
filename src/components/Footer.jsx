@@ -8,8 +8,8 @@ const smoothTo = (id) => {
 
 export default function Footer({ openModal }) {
   const catalogues = [
-    { label: 'Diwali 2025',      name: 'Diwali 2025 Catalogue', cat: 'Festive Collection',    src: '/assets/2025 Diwali catalogue.pdf' },
-    { label: 'Corporate Hampers', name: 'Corporate Hampers',     cat: 'B2B Gifting Solutions', src: '/assets/Corporate Hampers.pdf' },
+    { label: 'Diwali 2025',      name: 'Diwali 2025 Catalogue', cat: 'Festive Collection',    src: '/assets/2025%20Diwali%20catalogue.pdf' },
+    { label: 'Corporate Hampers', name: 'Corporate Hampers',     cat: 'B2B Gifting Solutions', src: '/assets/Corporate%20Hampers.pdf' },
   ]
 
   return (

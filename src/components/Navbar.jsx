@@ -35,8 +35,8 @@ export default function Navbar({ openModal }) {
   const goTo = (id) => { closeMobile(); smoothTo(id) }
 
   const catalogues = [
-    { label: 'Diwali 2025', sub: 'Festive Hamper Collection', ico: '🪔', src: '/assets/2025 Diwali catalogue.pdf', cat: 'Festive Collection' },
-    { label: 'Corporate Hampers', sub: 'B2B Gifting Solutions', ico: '💼', src: '/assets/Corporate Hampers.pdf', cat: 'B2B Gifting Solutions' },
+    { label: 'Diwali 2025', sub: 'Festive Hamper Collection', ico: '🪔', src: '/assets/2025%20Diwali%20catalogue.pdf', cat: 'Festive Collection' },
+    { label: 'Corporate Hampers', sub: 'B2B Gifting Solutions', ico: '💼', src: '/assets/Corporate%20Hampers.pdf', cat: 'B2B Gifting Solutions' },
   ]
 
   const mobileLinks = [
