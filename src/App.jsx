@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import Cursor from './components/Cursor'
 import Preloader from './components/Preloader'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -40,7 +39,6 @@ export default function App() {
 
   return (
     <>
-      <Cursor />
       <ScrollProgress />
       <Preloader onDone={handleLoaded} />
       {loaded && (
