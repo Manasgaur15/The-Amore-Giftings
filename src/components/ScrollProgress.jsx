@@ -7,7 +7,7 @@ export default function ScrollProgress() {
     const update = () => {
       const total = document.documentElement.scrollHeight - window.innerHeight
       const pct = total > 0 ? window.scrollY / total : 0
-      if (bar.current) bar.current.style.scaleX = pct
+      if (bar.current) bar.current.style.transform = `scaleX(${pct})`
     }
     window.addEventListener('scroll', update, { passive: true })
     return () => window.removeEventListener('scroll', update)

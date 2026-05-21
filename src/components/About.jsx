@@ -1,5 +1,3 @@
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
 import ScrollReveal from './ScrollReveal'
 
 const features = [
@@ -9,36 +7,28 @@ const features = [
 ]
 
 export default function About() {
-  const sectionRef = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  })
-  const y1 = useTransform(scrollYProgress, [0, 1], [50, -50])
-  const y2 = useTransform(scrollYProgress, [0, 1], [-30, 30])
-
   return (
-    <section className="section about" id="about" ref={sectionRef}>
+    <section className="section about" id="about">
       <div className="container about-grid">
 
         {/* ── Images stack ── */}
         <div className="about-imgs">
-          <motion.div className="ai-main" style={{ y: y1 }}>
+          <div className="ai-main">
             <img
               src="/assets/diwali-photo.jpg"
               alt="Gift Hamper Curation"
               loading="lazy"
             />
             <div className="ai-deco" />
-          </motion.div>
+          </div>
 
-          <motion.div className="ai-accent" style={{ y: y2 }}>
+          <div className="ai-accent">
             <img
               src="/assets/corporate-photo.jpg"
               alt="Premium Packaging"
               loading="lazy"
             />
-          </motion.div>
+          </div>
 
           <ScrollReveal delay={0.3}>
             <div className="ai-tag">
