@@ -329,6 +329,10 @@ ul, ol { list-style: none; }
 .mq-text:hover { color: var(--gold); }
 .mq-sep { color: var(--gold); font-size: 12px; }
 @keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes floatSlow   { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes floatMedium { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+.float-slow   { animation: floatSlow   4s ease-in-out infinite; will-change: transform; }
+.float-medium { animation: floatMedium 5s ease-in-out infinite 1s; will-change: transform; }
 
 /* ════════════════════════════════════════
    COLLECTIONS — Responsive Grid

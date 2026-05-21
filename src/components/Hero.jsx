@@ -89,28 +89,19 @@ export default function Hero({ openModal }) {
               loading="eager"
             />
 
-            {/* Floating card */}
-            <motion.div
-              className="hn-badge"
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            >
+            {/* CSS float animation — no JS cost during scroll */}
+            <div className="hn-badge float-slow">
               <span className="hn-badge-ico">✨</span>
               <div>
                 <div className="hn-badge-title">2025 Collection</div>
                 <div className="hn-badge-sub">Now Available</div>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Handcrafted badge */}
-            <motion.div
-              className="hn-craft"
-              animate={{ y: [0, -7, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-            >
+            <div className="hn-craft float-medium">
               <div className="hn-craft-n">100%</div>
               <div className="hn-craft-l">Handcrafted</div>
-            </motion.div>
+            </div>
           </div>
         </motion.div>
 
